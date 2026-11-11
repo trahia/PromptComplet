@@ -1,0 +1,9 @@
+# Mises à jour automatiques de sécurité. Pendant la construction, l'IA ajoute l'écosystème du projet
+# (npm, pip, gradle, swift…) : voir promptcomplet/methode/04-construction.md.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5

@@ -1,0 +1,5 @@
+{
+  "nom": "PromptComplet",
+  "depot_modele": "https://github.com/trahia/PromptComplet",
+  "note": "Adresse du dépôt modèle. Les verrous empêchent d'y envoyer le projet d'un utilisateur."
+}

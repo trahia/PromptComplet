@@ -1,0 +1,78 @@
+# PromptComplet — contrôles de sécurité. Fichier PROTÉGÉ : l'IA ne le modifie pas.
+# Actions et images figées par SHA / empreinte (version en commentaire). Dependabot propose les mises à jour.
+# Rappel : sur un dépôt privé d'un compte GitHub gratuit, la détection de secrets de GitHub n'existe pas ;
+# Gitleaks ci-dessous et le pre-commit sont la protection.
+name: Sécurité
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "17 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: securite-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  secrets:
+    name: Secrets (Gitleaks + PromptComplet)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Gitleaks (tout l'historique)
+        uses: gitleaks/gitleaks-action@e0c47f4f8be36e29cdc102c57e68cb5cbf0e8d1e # v3.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_ENABLE_COMMENTS: "false"
+          GITLEAKS_ENABLE_UPLOAD_ARTIFACT: "false"
+      - name: Scanner de secrets PromptComplet
+        run: node promptcomplet/scripts/scanner-secrets.mjs
+
+  code:
+    name: Analyse du code (Semgrep CE)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Semgrep (OWASP Top 10, secrets, règles par défaut)
+        run: >
+          docker run --rm -v "${{ github.workspace }}:/src" -w /src
+          semgrep/semgrep:1.185.0@sha256:67518c174185a2043fdbed16c70631b79209499b3671178e7194379b48295a0d
+          semgrep scan --config p/default --config p/owasp-top-ten --config p/secrets
+          --metrics=off --error
+          --exclude promptcomplet --exclude .claude --exclude node_modules
+
+  dependances:
+    name: Dépendances vulnérables (OSV-Scanner, audit)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: OSV-Scanner
+        run: |
+          set +e
+          docker run --rm -v "${{ github.workspace }}:/src" \
+            ghcr.io/google/osv-scanner:v2.7.1@sha256:a70ffffc2bfd33482953e5d6b64c6fcdb30239717a07b0f0d3ab2859ce3e4cde \
+            scan source -r /src
+          code=$?
+          if [ "$code" = "128" ]; then echo "Aucune dépendance à analyser pour l'instant."; exit 0; fi
+          exit $code
+      - name: npm audit
+        if: hashFiles('package-lock.json') != ''
+        run: npm audit --audit-level=high
+      - name: pnpm audit
+        if: hashFiles('pnpm-lock.yaml') != ''
+        run: corepack enable && pnpm audit --audit-level high

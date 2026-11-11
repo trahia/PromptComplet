@@ -1,0 +1,202 @@
+/* PromptComplet — styles du module d'accessibilité.
+   Adapte --a11y-accent et les couleurs de contraste aux design tokens du projet (tokens.css).
+   La taille du texte agit sur l'unité rem : utilise des rem dans tout le projet (Tailwind le fait). */
+
+html {
+  font-size: calc(100% * var(--a11y-text-scale, 1));
+}
+
+.a11y-skip-link {
+  position: absolute;
+  inset-inline-start: 1rem;
+  top: -10rem;
+  z-index: 10000;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  background: #000;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: underline;
+}
+.a11y-skip-link:focus {
+  top: 1rem;
+}
+
+.a11y-trigger {
+  position: fixed;
+  inset-inline-end: 1rem;
+  inset-block-end: 1rem;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border: 2px solid #fff;
+  border-radius: 9999px;
+  background: var(--a11y-accent, #1c4ed8);
+  color: #fff;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.3);
+  cursor: pointer;
+}
+
+.a11y-skip-link:focus-visible,
+.a11y-trigger:focus-visible,
+.a11y-panel :focus-visible {
+  outline: 3px solid #f5b400;
+  outline-offset: 2px;
+}
+
+.a11y-panel {
+  position: fixed;
+  inset-inline-end: 1rem;
+  inset-block-end: 4.75rem;
+  z-index: 9999;
+  width: min(22rem, calc(100vw - 2rem));
+  max-height: calc(100vh - 6rem);
+  overflow: auto;
+  padding: 1rem;
+  border: 1px solid #6b6b6b;
+  border-radius: 0.75rem;
+  background: #fff;
+  color: #111;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.25);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.a11y-panel h2 {
+  margin: 0;
+  font-size: 1.125rem;
+}
+.a11y-panel__header,
+.a11y-panel__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.a11y-panel__footer {
+  margin-top: 0.75rem;
+}
+.a11y-panel button {
+  min-height: 2.75rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #6b6b6b;
+  border-radius: 0.5rem;
+  background: #f4f4f5;
+  color: #111;
+  font: inherit;
+  cursor: pointer;
+}
+.a11y-panel button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.a11y-panel button[aria-pressed="true"] {
+  border-color: var(--a11y-accent, #1c4ed8);
+  background: var(--a11y-accent, #1c4ed8);
+  color: #fff;
+}
+.a11y-panel a {
+  color: #1c4ed8;
+  text-decoration: underline;
+}
+.a11y-close {
+  min-width: 2.75rem;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+.a11y-scale {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0.75rem 0;
+  padding: 0;
+  border: 0;
+}
+.a11y-scale legend {
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+.a11y-toggles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.a11y-toggles button {
+  width: 100%;
+  text-align: start;
+}
+.a11y-speech {
+  margin-top: 0.75rem;
+}
+.a11y-speech button {
+  width: 100%;
+}
+.a11y-status:empty {
+  display: none;
+}
+
+/* ----- Préférences appliquées au site ----- */
+
+/* Contraste renforcé : surcharge les tokens courants (shadcn/ui, Tailwind). Adapte aux tokens du projet. */
+html[data-a11y-contrast="high"] {
+  --background: #ffffff;
+  --foreground: #000000;
+  --primary: #0000c8;
+  --primary-foreground: #ffffff;
+  --muted-foreground: #1a1a1a;
+  --border: #000000;
+  --color-background: #ffffff;
+  --color-foreground: #000000;
+}
+html[data-a11y-contrast="high"] body {
+  background: #fff;
+  color: #000;
+}
+html[data-a11y-contrast="high"] a {
+  color: #0000c8;
+}
+
+html[data-a11y-font="readable"] body,
+html[data-a11y-font="readable"] body * {
+  font-family: var(--a11y-readable-font, "Atkinson Hyperlegible", Verdana, Tahoma, sans-serif) !important;
+}
+
+/* Espacement du texte : valeurs du critère WCAG 1.4.12. */
+html[data-a11y-spacing="large"] body * {
+  line-height: 1.5 !important;
+  letter-spacing: 0.12em !important;
+  word-spacing: 0.16em !important;
+}
+html[data-a11y-spacing="large"] body p {
+  margin-block-end: 2em !important;
+}
+
+html[data-a11y-links="underline"] a {
+  text-decoration: underline !important;
+  text-underline-offset: 0.2em;
+}
+
+html[data-a11y-motion="reduce"] *,
+html[data-a11y-motion="reduce"] *::before,
+html[data-a11y-motion="reduce"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+html[data-a11y-cursor="large"],
+html[data-a11y-cursor="large"] * {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24'%3E%3Cpath d='M4 2l16 9-7 2-3 7z' fill='%23000' stroke='%23fff' stroke-width='1.5'/%3E%3C/svg%3E") 4 2, auto !important;
+}
+
+@media (forced-colors: active) {
+  .a11y-trigger,
+  .a11y-panel button {
+    border: 2px solid ButtonText;
+  }
+}

@@ -1,0 +1,48 @@
+# PromptComplet — qualité du code : lint, types, tests, bout en bout, accessibilité.
+# Ce fichier n'est PAS protégé : l'IA l'adapte à la technologie du projet (sans jamais retirer un contrôle).
+name: Qualité
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: qualite-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  qualite:
+    name: Lint, types, tests, accessibilité
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+      - name: Installer les dépendances
+        if: hashFiles('package.json') != ''
+        run: |
+          if [ -f pnpm-lock.yaml ]; then corepack enable && pnpm install --frozen-lockfile
+          elif [ -f package-lock.json ]; then npm ci
+          else echo "::error::package.json sans fichier de verrouillage (lockfile)"; exit 1
+          fi
+      - name: Lint, types et tests unitaires
+        if: hashFiles('package.json') != ''
+        run: |
+          PM=npm; [ -f pnpm-lock.yaml ] && PM=pnpm
+          for s in lint typecheck test; do $PM run --if-present $s; done
+      - name: Navigateur pour les tests de bout en bout
+        if: hashFiles('playwright.config.ts', 'playwright.config.js', 'playwright.config.mjs') != ''
+        run: npx playwright install --with-deps chromium
+      - name: Tests de bout en bout et d'accessibilité
+        if: hashFiles('playwright.config.ts', 'playwright.config.js', 'playwright.config.mjs') != ''
+        run: |
+          PM=npm; [ -f pnpm-lock.yaml ] && PM=pnpm
+          for s in test:e2e test:a11y; do $PM run --if-present $s; done

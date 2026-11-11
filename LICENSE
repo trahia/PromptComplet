@@ -1,0 +1,23 @@
+PromptComplet — Licence d'utilisation privée
+Copyright (c) 2026 — le propriétaire du dépôt PromptComplet. Tous droits réservés.
+
+1. Accès
+   PromptComplet (la « Méthode ») est un dépôt privé. Seules les personnes à qui le propriétaire a
+   explicitement donné accès peuvent l'utiliser.
+
+2. Ce qui est autorisé
+   Toute personne autorisée peut utiliser la Méthode pour concevoir, développer et exploiter ses
+   propres projets, y compris des projets commerciaux. Le code, les contenus et les documents
+   produits pour un projet appartiennent à la personne qui porte ce projet. Ils ne sont pas couverts
+   par la présente licence, sauf les fichiers de la Méthode eux-mêmes (dossier « promptcomplet/ »,
+   « CLAUDE.md », « AGENTS.md », « .claude/hooks/ », « .githooks/ », workflows de contrôle).
+
+3. Ce qui est interdit sans accord écrit du propriétaire
+   - Publier, partager, redistribuer, revendre ou sous-licencier la Méthode, en tout ou en partie,
+     y compris sous une forme modifiée ou renommée.
+   - Donner accès à la Méthode à des tiers non autorisés.
+
+4. Absence de garantie
+   La Méthode est fournie « en l'état », sans garantie. Elle ne constitue pas un conseil juridique,
+   fiscal ou de sécurité. Chaque porteur de projet reste responsable de la conformité de son
+   produit et doit le faire vérifier par des professionnels avant tout lancement.

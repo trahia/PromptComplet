@@ -1,0 +1,58 @@
+# --- Secrets : ne JAMAIS versionner ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p8
+*.p12
+*.pfx
+*.keystore
+*.jks
+*.mobileprovision
+credentials.json
+service-account*.json
+secrets/
+
+# --- Mode mainteneur PromptComplet (créé à la main, jamais par l'IA) ---
+.promptcomplet-mainteneur
+
+# --- Dépendances et builds ---
+node_modules/
+.pnpm-store/
+dist/
+build/
+out/
+.next/
+.expo/
+.turbo/
+.vercel/
+coverage/
+*.tsbuildinfo
+
+# --- Mobile ---
+ios/Pods/
+android/.gradle/
+android/app/build/
+*.ipa
+*.apk
+*.aab
+DerivedData/
+
+# --- Rapports de tests ---
+playwright-report/
+test-results/
+blob-report/
+
+# --- Systèmes et éditeurs ---
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+npm-debug.log*
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# --- Réglages locaux de Claude Code (propres à chaque machine) ---
+.claude/settings.local.json
