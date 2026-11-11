@@ -191,7 +191,7 @@ export function analyserCommande(commande, ctx) {
     // Interpréteurs avec du code en ligne qui mentionne un fichier protégé
     if (INTERPRETEURS.has(cmd) && args.some((x) => OPTIONS_CODE.has(x.toLowerCase()))) {
       const code = seg.toLowerCase().replace(/\\/g, '/');
-      const cibles = ['claude.md', 'agents.md', 'promptcomplet/', '.claude/settings', '.claude/hooks', '.githooks', '.github/workflows/securite', '.github/workflows/conformite'];
+      const cibles = ['claude.md', 'agents.md', 'promptcomplet/', '.claude/settings', '.claude/hooks', '.githooks', '.github/workflows/securite', '.github/workflows/conformite', '.gitleaks.toml'];
       const ecrit = /(write|unlink|rm|remove|rename|append|truncate|copy|set-content|out-file|del |>\s*)/.test(code);
       if (!mainteneur && ecrit && cibles.some((c) => code.includes(c))) {
         return message('fichier protégé', 'Ce code modifierait un fichier de la méthode PromptComplet. Interdit pour l’IA.');

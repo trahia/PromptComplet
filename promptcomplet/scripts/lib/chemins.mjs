@@ -31,6 +31,7 @@ export const PROTEGES = [
   '.github/workflows/securite.yml',
   '.github/workflows/conformite.yml',
   '.github/workflows/zap.yml',
+  '.gitleaks.toml',
   'promptcomplet/',
   '.claude/hooks/',
   '.githooks/',

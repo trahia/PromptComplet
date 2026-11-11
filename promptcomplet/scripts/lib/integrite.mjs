@@ -14,6 +14,7 @@ const FICHIERS_RACINE = [
   '.github/workflows/securite.yml',
   '.github/workflows/conformite.yml',
   '.github/workflows/zap.yml',
+  '.gitleaks.toml',
 ];
 const DOSSIERS = ['promptcomplet', '.claude/hooks', '.githooks', ...SKILLS_METHODE.map((s) => `.claude/skills/${s}`)];
 const EXCLUS = new Set([FICHIER_INTEGRITE, 'promptcomplet/.installe']);

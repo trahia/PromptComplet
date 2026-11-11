@@ -32,7 +32,7 @@ const SEULEMENT_MODELE = new Set(['README.md', 'DEMARRER.md', 'LICENSE']);
 const EXCLUS_RACINE = new Set(['.git', 'node_modules', '.promptcomplet-source', '.promptcomplet-mainteneur', ...SEULEMENT_MODELE]);
 const EXCLUS = new Set(['promptcomplet/.installe', '.claude/settings.local.json']);
 const SKILLS = ['demarrer', 'verifier', 'nouvelle-fonctionnalite', 'veille-legale', 'lancement'];
-const METHODE_FICHIERS = ['CLAUDE.md', 'AGENTS.md', '.claude/settings.json', '.github/workflows/securite.yml', '.github/workflows/conformite.yml', '.github/workflows/zap.yml'];
+const METHODE_FICHIERS = ['CLAUDE.md', 'AGENTS.md', '.claude/settings.json', '.github/workflows/securite.yml', '.github/workflows/conformite.yml', '.github/workflows/zap.yml', '.gitleaks.toml'];
 const METHODE_DOSSIERS = ['promptcomplet/', '.claude/hooks/', '.githooks/', ...SKILLS.map((s) => `.claude/skills/${s}/`)];
 
 const ok = (m) => console.log(`✔ ${m}`);

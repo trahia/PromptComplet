@@ -27,4 +27,7 @@ jobs:
         with:
           node-version: 24
       - name: Vérification de conformité
-        run: node promptcomplet/scripts/verifier-conformite.mjs --ci ${{ startsWith(github.ref, 'refs/tags/') && '--release' || '' }}
+        env:
+          # Sur un tag (version publiée) : mode lancement strict. Passé par variable (pas d'injection dans le shell).
+          MODE: ${{ startsWith(github.ref, 'refs/tags/') && '--release' || '' }}
+        run: node promptcomplet/scripts/verifier-conformite.mjs --ci $MODE

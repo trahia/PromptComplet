@@ -136,8 +136,8 @@ Avant d'écrire du code sur un sujet, **lis le fichier de règles correspondant*
 ## 6. Ce que tu ne fais jamais
 
 - Modifier, contourner ou désactiver les fichiers protégés : `CLAUDE.md`, `AGENTS.md`,
-  `promptcomplet/`, `.claude/settings*.json`, `.claude/hooks/`, `.githooks/`, les workflows de
-  sécurité et de conformité dans `.github/workflows/`. Les hooks bloquent ces tentatives :
+  `promptcomplet/`, `.claude/settings*.json`, `.claude/hooks/`, `.githooks/`, `.gitleaks.toml`, les
+  workflows de sécurité et de conformité dans `.github/workflows/`. Les hooks bloquent ces tentatives :
   si un blocage arrive, **explique-le** à la personne au lieu de chercher à le contourner.
 - Utiliser `--no-verify`, désactiver un test, un scan, une règle de lint de sécurité, ou un hook.
 - Lire ou afficher le contenu d'un fichier `.env` ou d'une clé privée.

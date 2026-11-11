@@ -1,0 +1,10 @@
+# PromptComplet — configuration Gitleaks : règles par défaut + exceptions documentées.
+# Fichier PROTÉGÉ : l'IA ne peut pas y ajouter d'exception (cela pourrait masquer un vrai secret).
+# Toute exception est ajoutée à la main par la personne, avec une justification.
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Empreintes SHA-256 des fichiers de la méthode : ce ne sont pas des secrets."
+paths = ['''promptcomplet/integrite\.json''']

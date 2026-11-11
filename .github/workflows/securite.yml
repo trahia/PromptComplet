@@ -32,6 +32,7 @@ jobs:
         uses: gitleaks/gitleaks-action@e0c47f4f8be36e29cdc102c57e68cb5cbf0e8d1e # v3.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_VERSION: "8.30.1"
           GITLEAKS_ENABLE_COMMENTS: "false"
           GITLEAKS_ENABLE_UPLOAD_ARTIFACT: "false"
       - name: Scanner de secrets PromptComplet
@@ -47,7 +48,7 @@ jobs:
           persist-credentials: false
       - name: Semgrep (OWASP Top 10, secrets, règles par défaut)
         run: >
-          docker run --rm -v "${{ github.workspace }}:/src" -w /src
+          docker run --rm -v "$GITHUB_WORKSPACE:/src" -w /src
           semgrep/semgrep:1.185.0@sha256:67518c174185a2043fdbed16c70631b79209499b3671178e7194379b48295a0d
           semgrep scan --config p/default --config p/owasp-top-ten --config p/secrets
           --metrics=off --error
@@ -64,7 +65,7 @@ jobs:
       - name: OSV-Scanner
         run: |
           set +e
-          docker run --rm -v "${{ github.workspace }}:/src" \
+          docker run --rm -v "$GITHUB_WORKSPACE:/src" \
             ghcr.io/google/osv-scanner:v2.7.1@sha256:a70ffffc2bfd33482953e5d6b64c6fcdb30239717a07b0f0d3ab2859ce3e4cde \
             scan source -r /src
           code=$?
