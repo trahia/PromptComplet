@@ -61,6 +61,38 @@ Voir `catalogue/paiements.md` pour les commissions et les prestataires par pays.
   - obligations DSA de traçabilité des vendeurs professionnels ;
   - déclaration fiscale des revenus des vendeurs (DAC7 dans l'UE).
   Signale-le clairement dans le plan.
+- **Affichages obligatoires** (fiche produit, panier, bouton de commande, confirmation,
+  abonnements, avis) : voir `legal/affichages-obligatoires.md`, point par point.
+- **Pratiques interdites** :
+  - fausse réduction : le prix de référence est le plus bas des 30 derniers jours ;
+  - supplément payant pré-coché ;
+  - faux compte à rebours ou fausse rareté ;
+  - faux avis ou avis achetés (UE : directive Omnibus ; États-Unis : FTC 16 CFR 465 ; ⚠️ Royaume-Uni :
+    DMCC Act) ;
+  - blocage ou redirection selon le pays dans l'UE (règlement géoblocage 2018/302).
+- **Abonnements hors de France** : Californie (Automatic Renewal Law modifiée par AB 2863, depuis le
+  01/07/2025) : consentement exprès, résiliation en ligne, rappel annuel, preuve du consentement
+  conservée 3 ans. ⚠️ Règle fédérale « click-to-cancel » de la FTC : annulée en justice le
+  08/07/2025, nouvelle procédure ouverte en mars 2026, à suivre. ⚠️ Royaume-Uni : nouveau régime des
+  abonnements (DMCC Act) annoncé pour 2027.
+- **Places de marché** :
+  - **DAC7** : collecter les informations fiscales des vendeurs, les vérifier et faire la
+    déclaration annuelle à l'administration fiscale. Sont exclus les vendeurs sous 30 ventes et
+    2 000 € par an (https://www.impots.gouv.fr) ;
+  - **encaisser l'argent pour le compte des vendeurs**, ou proposer une cagnotte, un porte-monnaie
+    ou des cartes cadeaux, est un service de paiement réglementé (DSP2, directive 2015/2366). On
+    passe **toujours** par un prestataire agréé qui le fait pour nous (Stripe Connect, Mangopay…).
+    Jamais de fonds détenus par le projet lui-même.
+- **TVA hors UE**, si aucun prestataire ne la gère à ta place (Paddle, ou d'autres plateformes qui
+  vendent en ton nom) :
+  - Royaume-Uni : immatriculation dès la première vente de service numérique pour un vendeur non
+    établi, sans seuil ;
+  - Suisse : immatriculation dès 100 000 CHF de chiffre d'affaires mondial, s'il y a des ventes en
+    Suisse ;
+  - ⚠️ États-Unis (sales tax par État) et Canada (TPS/TVH) : à vérifier.
+- **Sanctions internationales** : ne pas vendre à des pays ou des personnes sous sanctions
+  (carte des sanctions de l'UE : https://www.sanctionsmap.eu ; États-Unis : OFAC). Le prestataire
+  de paiement filtre en partie, mais pas tout.
 
 ## Moyen de paiement « Autre » proposé par la personne
 
@@ -80,3 +112,5 @@ livraison : possible, avec une procédure claire.
 - Paiement réussi, refusé, authentification 3-D Secure, remboursement, litige, échec de webhook,
   abonnement (création, renouvellement, échec, résiliation). Le tout en mode test, avec les cartes
   de test publiées par le prestataire.
+- Concurrence : 20 utilisations simultanées d'un même code promo, crédit ou stock limité. Une
+  seule doit réussir (règle 01, section 4).

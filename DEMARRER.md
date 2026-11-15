@@ -27,6 +27,30 @@
 5. Tape `/demarrer` (ou écris « on commence »), puis réponds aux questions. Tu peux toujours dire
    « je ne sais pas » : Claude te proposera une option.
 
+## Tu as déjà un projet ? Fais d'abord un audit, sans rien modifier
+
+Claude analyse ton projet en **lecture seule**. Il te donne dans la discussion la liste des problèmes,
+classée par gravité, avec pour chacun le fichier, la règle ou la loi concernée et la correction
+proposée. Il ne modifie, n'installe et ne commite **rien**. Vous décidez ensuite ensemble quoi corriger,
+point par point.
+
+**Avec Claude Code**, ouvert dans le dossier de ton projet, colle :
+
+> Fais un audit PromptComplet de ce projet **sans rien modifier**. Clone la méthode
+> https://github.com/trahia/PromptComplet dans un dossier temporaire **en dehors** de ce projet,
+> puis suis exactement `promptcomplet/methode/09-audit-seul.md` de ce clone. Donne-moi la liste
+> des problèmes dans la discussion.
+
+**Avec claude.ai (navigateur)**, dans un projet Claude : ajoute aux connaissances du projet, via
+l'intégration GitHub, le dépôt PromptComplet **et** celui de ton projet, puis colle :
+
+> Suis le fichier `promptcomplet/methode/09-audit-seul.md` du dépôt PromptComplet pour auditer mon
+> projet, sans rien modifier. Donne-moi la liste des problèmes classée par gravité.
+
+Sur claude.ai, Claude ne peut de toute façon rien modifier dans ton code. En revanche, il ne peut ni
+lancer les tests ni les scanners, et un très gros projet peut ne pas tenir en entier. Pour les
+corrections, Claude Code est plus adapté.
+
 ## Les commandes utiles ensuite
 
 | Commande | À quoi elle sert |

@@ -20,8 +20,17 @@ les scans de sécurité (voir `catalogue/outils-securite.md`).
       (pied de page) ou depuis les réglages (app).
 - [ ] Contrats de sous-traitance (DPA) acceptés chez chaque fournisseur.
 - [ ] Registre des traitements à jour.
+- [ ] Selon le projet, obligations vérifiées dans les fiches pays :
+      - responsabilité du fait des produits (UE, directive 2024/2853) ;
+      - Data Act (SaaS, objets connectés) ;
+      - P2B (vendeurs professionnels) ;
+      - influence commerciale (France).
+- [ ] Assurance responsabilité civile professionnelle vérifiée par la personne.
 - [ ] Relecture par un professionnel **recommandée** (obligatoire en pratique pour la vente en ligne
       ou les données sensibles). Dis-le clairement à la personne.
+- [ ] **`legal/affichages-obligatoires.md` repris point par point**, page ouverte : pied de page,
+      bandeau cookies, chaque formulaire, fiche produit, panier, bouton de commande, e-mail de
+      confirmation, abonnement, avis, app.
 
 ## 3. Sécurité
 
@@ -34,6 +43,24 @@ les scans de sécurité (voir `catalogue/outils-securite.md`).
 - [ ] Limitation de débit sur les connexions, les inscriptions et les formulaires.
 - [ ] Suivi des erreurs et alertes configurés, sans données personnelles dans les journaux.
 - [ ] `security.txt` publié, contact sécurité défini, procédure en cas de fuite connue.
+- [ ] `projet/maintenance-securite.md` complet :
+      - durée de support annoncée ;
+      - délais de correction des failles ;
+      - calendrier de rotation des clés ;
+      - historique des versions.
+- [ ] Liste des composants générée pour cette version : `projet/sbom.cdx.json` (règle 01,
+      section 13).
+- [ ] Test d'intrusion par un professionnel fait et failles graves corrigées, s'il est obligatoire
+      (données sensibles, place de marché avec paiement, public mineur) : `projet/test-intrusion.md`.
+- [ ] Fichiers envoyés par les utilisateurs, s'il y en a : envoi d'un faux fichier testé (un `.exe`
+      renommé en `.jpg` doit être refusé), métadonnées GPS supprimées, antivirus actif.
+- [ ] Continuité (règle 01, section 9) :
+      - codes de secours de la double authentification rangés hors ligne ;
+      - successeur ou second administrateur désigné ;
+      - fiche « comptes et qui appeler » prête.
+- [ ] Test : un utilisateur ne peut modifier ni son rôle, ni son abonnement, ni sa date de
+      consentement ; 20 utilisations simultanées d'un code promo ou d'un crédit n'en accordent
+      qu'une.
 
 ## 4. Données et cookies
 
@@ -60,6 +87,13 @@ les scans de sécurité (voir `catalogue/outils-securite.md`).
 - [ ] SPF, DKIM et DMARC configurés et vérifiés. E-mails de test reçus en boîte principale.
 - [ ] Nom de domaine renouvelé automatiquement, protection WHOIS si disponible.
 - [ ] SEO de base : titres, descriptions, sitemap, robots.txt, aperçus de partage.
+- [ ] Domaine :
+      - verrou de transfert ;
+      - DNSSEC ;
+      - enregistrement CAA ;
+      - aucun enregistrement DNS orphelin ;
+      - e-mail de récupération du registrar hors du domaine.
+- [ ] Suivi d'ouverture des e-mails désactivé, ou soumis à un consentement séparé (CNIL, 2026).
 
 ## 8. Stores (applications)
 
@@ -76,6 +110,14 @@ les scans de sécurité (voir `catalogue/outils-securite.md`).
   - classification du contenu.
 - [ ] Règles de paiement des stores revérifiées (elles évoluent souvent).
 - [ ] URL de la politique de confidentialité renseignée dans les deux stores.
+- [ ] **Apple, technique** :
+      - manifeste de confidentialité `PrivacyInfo.xcprivacy`, avec les raisons des API sensibles et
+        les SDK tiers signés (exigé depuis le 01/05/2024) ;
+      - demande App Tracking Transparency avant tout suivi publicitaire ;
+      - déclaration de conformité à l'export (chiffrement).
+- [ ] **Google Play, technique** : niveau d'API cible exigé à jour. ⚠️ Vérifier le niveau en vigueur
+      sur https://support.google.com/googleplay/android-developer/answer/11926878.
+- [ ] Écran « Licences open source » présent dans l'app.
 
 ## 9. Paiements
 

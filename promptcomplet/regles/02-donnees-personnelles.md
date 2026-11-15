@@ -62,6 +62,21 @@ chaque donnée et chaque sous-traitant apparaît dans la politique de confidenti
 - Polices de caractères, scripts et images sont **hébergés chez nous**, pas sur un CDN tiers qui
   recevrait l'adresse IP des visiteurs (ex. Google Fonts appelé directement).
 
+### Quand c'est le projet qui est sous-traitant (logiciel pour des clients professionnels)
+
+Si le produit traite les données **des clients de ton client** (CRM, outil de réservation, SaaS
+B2B…), le projet est **sous-traitant** au sens du RGPD (art. 28). Il doit :
+- proposer un **contrat de sous-traitance (DPA)** à chaque client. Modèle :
+  `legal/modeles/dpa-clients.md`, exigé automatiquement quand `logiciel_saas` est vrai et que la
+  clientèle est professionnelle ;
+- publier la **liste de ses propres sous-traitants**, et prévenir avant tout changement ;
+- tenir un registre en tant que sous-traitant (art. 30(2)) ;
+- aider le client à répondre aux demandes de droits ;
+- prévenir le client **sans délai injustifié** en cas de fuite, pour qu'il puisse notifier dans
+  les 72 heures ;
+- ne jamais utiliser ces données pour son propre compte (statistiques, entraînement d'IA…) sans
+  base légale.
+
 ## Données sensibles
 
 Santé, données génétiques ou biométriques, origine, opinions politiques, religion, syndicat,
@@ -71,6 +86,15 @@ d'identité et données financières :
 - sinon : base légale renforcée (souvent consentement explicite), **ASVS niveau 3**, chiffrement des
   champs et **analyse d'impact (AIPD)** ;
 - santé en France : hébergeur certifié **HDS** obligatoire.
+- **Application à finalité médicale** (diagnostic, suivi d'une maladie, calcul de dose, aide à la
+  décision clinique) : c'est un **dispositif médical**, qui exige un marquage CE (règlement
+  2017/745 ; guide MDCG 2019-11 révision 1 de juin 2025, qui vise aussi les apps et le cloud).
+  - **Arrête-toi et alerte la personne** avant toute construction : l'avis d'un spécialiste
+    réglementaire est obligatoire ;
+  - une app de bien-être sans finalité médicale n'est pas concernée, mais la frontière est fine ;
+  - États-Unis : le Washington My Health My Data Act s'applique quelle que soit la taille, avec
+    un consentement séparé pour le partage. La FTC Health Breach Notification Rule couvre les apps
+    de santé non soumises à HIPAA.
 
 ## Mineurs
 
@@ -90,6 +114,16 @@ d'identité et données financières :
 | Contact | Une adresse de contact dédiée, indiquée dans la politique de confidentialité |
 
 Délai de réponse : 1 mois au plus (RGPD). Les fiches pays précisent les délais locaux.
+- **Exception à l'effacement : les conservations imposées par la loi.** Exemples :
+  - factures : 10 ans ;
+  - contrats de 120 € ou plus : 10 ans ;
+  - en France, pour un service qui héberge des contenus d'utilisateurs (décret 2021-1362) : les
+    identifiants de création du compte pendant 1 an après sa fermeture, les données de paiement et
+    de connexion (adresse IP) pendant 1 an, et l'identité civile pendant 5 ans si elle est
+    collectée. ⚠️ À vérifier sur Légifrance.
+  - Ces données sont **isolées** (table ou stockage séparé, accès restreint et journalisé). Elles ne
+    servent à rien d'autre et sont purgées automatiquement à l'échéance. La politique de
+    confidentialité l'explique.
 
 ## Consentement
 

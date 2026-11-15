@@ -117,6 +117,14 @@ export function verifierConformite(racine, options = {}) {
   if (fs.existsSync(path.join(racine, 'package.json'))) {
     const verrous = ['package-lock.json', 'pnpm-lock.yaml', 'yarn.lock', 'bun.lock', 'bun.lockb'];
     if (!verrous.some((v) => fs.existsSync(path.join(racine, v)))) avert('securite', 'package.json sans fichier de verrouillage (lockfile) : versionne-le pour figer les dépendances.');
+    // Chaîne d'approvisionnement : scripts d'installation bloqués, délai avant adoption (règle 01, section 8)
+    if (fs.existsSync(path.join(racine, 'pnpm-lock.yaml'))) {
+      const ws = lireTexte(path.join(racine, 'pnpm-workspace.yaml')) || '';
+      if (!/minimumReleaseAge/.test(ws)) avert('securite', 'pnpm : ajoute « minimumReleaseAge: 10080 » (7 jours) dans pnpm-workspace.yaml, pour ne pas installer une version piégée publiée la veille.');
+    } else if (fs.existsSync(path.join(racine, 'package-lock.json'))) {
+      const npmrc = lireTexte(path.join(racine, '.npmrc')) || '';
+      if (!/^\s*ignore-scripts\s*=\s*true/m.test(npmrc)) avert('securite', 'npm : ajoute « ignore-scripts=true » dans .npmrc, pour bloquer les scripts d’installation des paquets (attaques de 2025-2026).');
+    }
   }
 
   if (preCommit) return r;
@@ -198,6 +206,30 @@ export function verifierConformite(racine, options = {}) {
         if (s?.nom && !polN.includes(sansAccents(s.nom))) {
           err('donnees', `Le sous-traitant « ${s.nom} » (config.sous_traitants) n'apparaît pas dans legal/${languePrincipale}/politique-confidentialite.md.`);
         }
+      }
+    }
+  }
+
+  // 6 bis. Mentions obligatoires dans les pages (legal/affichages-obligatoires.md)
+  const pagesExigees = new Set(ob.pages.map((p) => p.id));
+  for (const m of ob.mentions || []) {
+    if (!pagesExigees.has(m.page) || !langues.includes(m.langue)) continue;
+    const rel = `legal/${m.langue}/${m.page}.md`;
+    const contenu = lireTexte(path.join(racine, rel));
+    if (contenu !== null && !m.motif.test(contenu)) err('mentions', `${rel} : il manque ${m.libelle} (${m.raison}).`);
+  }
+
+  // 6 ter. Chaque cookie déclaré (nom et fournisseur) apparaît dans la page cookies, dans chaque langue
+  if (pagesExigees.has('cookies')) {
+    const cookies = config.cookies || [];
+    if (!cookies.length) err('cookies', 'config.cookies est vide alors que des cookies non essentiels sont prévus : liste chaque cookie réellement déposé (nom, fournisseur, finalité, durée, catégorie), vérifié dans le navigateur.');
+    for (const l of langues) {
+      const page = lireTexte(path.join(racine, `legal/${l}/cookies.md`));
+      if (page === null) continue;
+      const pageN = sansAccents(page);
+      for (const ck of cookies) {
+        if (ck?.nom && !pageN.includes(sansAccents(ck.nom))) err('cookies', `Le cookie « ${ck.nom} » (config.cookies) n'apparaît pas dans legal/${l}/cookies.md.`);
+        if (ck?.fournisseur && !pageN.includes(sansAccents(ck.fournisseur))) err('cookies', `Le fournisseur « ${ck.fournisseur} » (config.cookies) n'apparaît pas dans legal/${l}/cookies.md (liste des partenaires).`);
       }
     }
   }

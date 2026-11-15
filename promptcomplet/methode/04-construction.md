@@ -24,8 +24,12 @@ Prérequis : `projet/plan.md` validé, et `config.statut` égal à `"constructio
    données fictives.
 8. **Dépôt du projet** : propose à la personne de créer **son propre** dépôt GitHub privé
    (`gh repo create <nom> --private --source . --push`). Ensuite :
-   - active Dependabot (alertes et mises à jour de sécurité) ;
+   - active Dependabot (alertes et mises à jour de sécurité), et ajoute l'écosystème du projet dans
+     `.github/dependabot.yml` **avec un `cooldown` de 7 jours**, comme pour les GitHub Actions ;
    - si possible, protège la branche `main`.
+   - Dépendances JavaScript (`regles/01-securite.md`, section 8) :
+     - pnpm : `minimumReleaseAge: 10080` et `onlyBuiltDependencies` dans `pnpm-workspace.yaml` ;
+     - npm : `ignore-scripts=true` dans `.npmrc`.
 9. Lance `node promptcomplet/scripts/verifier-conformite.mjs`, corrige, puis note la mise en
    place dans le journal.
 

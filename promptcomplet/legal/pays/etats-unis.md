@@ -1,6 +1,6 @@
 # États-Unis
 
-> Fiche mise à jour le 2026-11-11. Revérifier selon `methode/02-veille-legale.md`.
+> Fiche mise à jour le 2026-11-15. Revérifier selon `methode/02-veille-legale.md`.
 
 ## Données personnelles : pas de loi fédérale générale
 
@@ -40,6 +40,32 @@ concernés.
 - **ADA Titre III** : pas de règlement fédéral pour le web. Les tribunaux et la circulaire du DOJ
   (2022) utilisent les WCAG comme référence. Le risque de contentieux est élevé : viser WCAG 2.2 AA.
 - Titre II (collectivités publiques) : échéances reportées au 26/04/2027 et 26/04/2028. ⚠️
+
+## Consommation, abonnements, avis
+
+- **Abonnements, Californie** : Automatic Renewal Law modifiée par AB 2863, pour les contrats conclus
+  depuis le 01/07/2025 :
+  - consentement exprès au renouvellement automatique ;
+  - résiliation en ligne aussi simple que la souscription ;
+  - rappel annuel ;
+  - preuve du consentement conservée 3 ans.
+  Source :
+  https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=202320240AB2863
+- **Règle fédérale « click-to-cancel » de la FTC** : annulée par une cour d'appel le 08/07/2025 ; une
+  nouvelle procédure a été ouverte en mars 2026. ⚠️ À suivre.
+- **Faux avis** : interdits par la FTC (16 CFR 465, depuis le 21/10/2024), avec des amendes civiles.
+  Source : https://www.ecfr.gov/current/title-16/chapter-I/subchapter-D/part-465
+- **Santé** :
+  - Washington My Health My Data Act : toutes tailles, consentement, consentement séparé pour le
+    partage, action en justice possible pour les personnes ;
+  - FTC Health Breach Notification Rule, pour les apps de santé non couvertes par HIPAA.
+- **SMS** : enregistrement A2P 10DLC, consentement écrit préalable pour le marketing (TCPA), STOP et
+  HELP (`regles/10-emails-notifications.md`).
+- **Lois sur l'âge dans les stores** (Utah, Texas, Louisiane) : utiliser les signaux d'âge des
+  stores (Apple Declared Age Range, Google Play Age Signals). ⚠️ La loi du Texas fait l'objet d'un
+  recours, et son statut est incertain : à vérifier.
+- **Sales tax** : obligations par État selon les seuils de vente. ⚠️ À vérifier, ou passer par un
+  prestataire qui la gère.
 
 ## Sources officielles à consulter
 

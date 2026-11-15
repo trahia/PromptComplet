@@ -46,8 +46,19 @@ export function saveConsent(choix: ConsentChoices): void {
   window.dispatchEvent(new CustomEvent<ConsentChoices>(CONSENT_CHANGE_EVENT, { detail: choix }));
 }
 
-/** Vrai seulement si la personne a explicitement accepté cette catégorie. */
+/**
+ * Signal « Global Privacy Control » envoyé par le navigateur (Firefox, Brave, extensions…).
+ * Il vaut refus de la vente et du partage des données, au sens de la CCPA en Californie et d'autres
+ * lois d'États américains. PromptComplet le respecte partout : il bloque la publicité ciblée.
+ */
+export function globalPrivacyControlActive(): boolean {
+  if (!isBrowser()) return false;
+  return (window.navigator as Navigator & { globalPrivacyControl?: boolean }).globalPrivacyControl === true;
+}
+
+/** Vrai seulement si la personne a explicitement accepté cette catégorie (et, pour la publicité, sans signal GPC). */
 export function hasConsent(category: ConsentCategory): boolean {
+  if (category === "publicite" && globalPrivacyControlActive()) return false;
   return readConsent()?.choix[category] === true;
 }
 

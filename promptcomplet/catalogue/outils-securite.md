@@ -27,6 +27,10 @@
 | **Trivy** | Vulnérabilités, secrets, mauvaises configurations (conteneurs, IaC) | ⚠️ **Les actions `aquasecurity/trivy-action` et `setup-trivy` ont été compromises en mars 2026** (tags réécrits, vol de secrets), ainsi que le binaire 0.69.4. Ne jamais utiliser les versions 0.69.4 à 0.69.6. Si Trivy est nécessaire (conteneurs) : image Docker officielle figée **par empreinte (digest)**, jamais par tag. |
 | **OWASP ZAP** (action `zaproxy/action-baseline` v0.15+) | Scan dynamique d'une URL de préproduction | Ne jamais scanner un site qui n'appartient pas à la personne. |
 | **Plugin security-guidance**, `/security-review` | Revue de sécurité par l'IA | Ne remplace pas les scanners : les complète. |
+| **npm sbom** (intégré à npm 10+) | Liste des composants (SBOM) d'un projet npm | `npm sbom --sbom-format cyclonedx --omit dev > projet/sbom.cdx.json` |
+| **cdxgen** (OWASP CycloneDX) | SBOM pour pnpm, Gradle, Swift et plusieurs langages | Source : https://github.com/CycloneDX/cdxgen. Version figée, jamais `latest`. |
+| **ClamAV** | Antivirus open source pour les fichiers envoyés par les utilisateurs | À faire tourner côté serveur, ou utiliser l'analyse du fournisseur de stockage si elle existe. |
+| **Test d'intrusion humain** | Failles de logique que les scanners ne voient pas | France : prestataires qualifiés **PASSI** (liste ANSSI, https://cyber.gouv.fr). Bug bounty : YesWeHack. Voir règle 01, section 12. |
 
 ## Règles pour les GitHub Actions
 

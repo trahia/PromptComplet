@@ -7,6 +7,8 @@ export const LEGAL_PAGES = {
   cgv: "Conditions générales de vente",
   cookies: "Politique cookies",
   "declaration-accessibilite": "Déclaration d'accessibilité",
+  // Seulement pour un logiciel vendu à des professionnels (RGPD art. 28) : à lier depuis les CGV ou l'espace client.
+  "dpa-clients": "Accord de traitement des données",
 } as const;
 
 export type LegalPageId = keyof typeof LEGAL_PAGES;

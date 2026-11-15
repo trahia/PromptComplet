@@ -36,6 +36,27 @@ Il est interdit de :
 - **Signalement** : chaque contenu peut être signalé via [À COMPLÉTER : bouton ou formulaire]. Nous
   examinons les signalements, motivons nos décisions et permettons de les contester.
 - Modération : [À COMPLÉTER : comment, par qui, avec ou sans outils automatisés].
+- **Point de contact unique** (règlement européen sur les services numériques, art. 11 et 12) :
+  pour les utilisateurs comme pour les autorités, écris à [À COMPLÉTER : adresse e-mail dédiée].
+  Langues acceptées : [À COMPLÉTER : ex. français, anglais].
+
+<!-- IA : seulement si config.avis_clients est vrai (Code conso L111-7-2, D111-16 à D111-19) -->
+### Avis des utilisateurs
+
+- Les avis [À COMPLÉTER : font / ne font pas] l'objet d'un contrôle. [À COMPLÉTER : si oui,
+  comment : achat vérifié, modération humaine ou automatique, délai.]
+- Chaque avis est daté. Ils sont classés par [À COMPLÉTER : date, note…].
+- Si nous refusons ton avis, nous t'en donnons la raison.
+- Nous ne publions jamais de faux avis, ni d'avis rémunérés, et nous ne masquons pas les avis
+  négatifs.
+
+<!-- IA : seulement si config.place_de_marche est vrai (Code conso L111-7, règlement P2B art. 5) -->
+### Classement des offres et vendeurs
+
+- Les offres sont classées selon [À COMPLÉTER : critères principaux, et l'éventuelle influence
+  d'une rémunération].
+- Chaque offre indique si le vendeur est un professionnel ou un particulier. Les droits des
+  consommateurs, dont la rétractation, ne s'appliquent pas aux achats auprès d'un particulier.
 
 ## 5. Intelligence artificielle
 

@@ -8,6 +8,8 @@
 
 | Dossier / fichier | Rôle |
 |---|---|
+| `affichages-obligatoires.md` | **Tout ce qui doit être visible, endroit par endroit** : pied de page, bandeau cookies, formulaires, fiche produit, panier, e-mails, abonnements, app. À relire au plan, à chaque fonctionnalité et avant le lancement. |
+| `modeles/mention-formulaire.md` | Textes courts à afficher sous chaque formulaire (inscription, contact, newsletter, commande). |
 | `matrice-obligations.md` | Quelles pages et fonctionnalités sont exigées, selon les pays et les fonctionnalités. Le script de conformité applique cette matrice. |
 | `pays/` | Une fiche par pays ou zone : lois, régulateur, obligations, sources officielles à consulter. |
 | `modeles/` | Modèles des pages légales et des documents internes, avec des repères `[À COMPLÉTER : …]`. |
@@ -30,6 +32,7 @@
 | DZ | `pays/algerie.md` |
 | SN, CI | `pays/senegal-cote-divoire.md` |
 | BR | `pays/bresil.md` |
+| IN, CN, JP, AU, KR | `pays/asie-pacifique.md` |
 | Tout autre pays | `pays/autres-pays.md` (méthode générique) |
 
 ## Où vivent les pages légales d'un projet
@@ -47,4 +50,5 @@ Noms de pages normalisés (utilisés par le script de conformité) :
 | Conditions générales d'utilisation | `cgu.md` |
 | Conditions générales de vente | `cgv.md` |
 | Politique cookies | `cookies.md` |
+| Accord de traitement des données (clients professionnels d'un logiciel) | `dpa-clients.md` |
 | Déclaration d'accessibilité | `declaration-accessibilite.md` |

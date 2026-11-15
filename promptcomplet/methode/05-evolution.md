@@ -15,9 +15,13 @@ Elle est aussi déclenchée par la commande `/nouvelle-fonctionnalite`.
 | Ajoute-t-elle de l'**IA** ? | Suivre `regles/11-ia-dans-le-produit.md` ; `config.ia_dans_le_produit = true` ; mention de transparence. |
 | Concerne-t-elle des **mineurs** ? | Vérification d'âge ou consentement parental selon le pays ; pas de publicité ciblée. |
 | Permet-elle aux utilisateurs de **publier du contenu** ? | Modération, bouton de signalement, CGU ; `config.contenu_utilisateurs = true`. |
+| Permet-elle d'**envoyer des fichiers** (photo de profil, document, pièce jointe) ? | Suivre `regles/01-securite.md`, section 4 (signature, taille, liste blanche, réencodage, antivirus) ; utiliser `kit/web/security/upload-validation.ts` ; `config.televersement_fichiers = true` et `config.preuves.controle_fichiers`. |
+| Ajoute-t-elle un **objet connecté**, une offre **SaaS** pour des clients, des **vendeurs professionnels** ou des **influenceurs** ? | Mettre à jour `config` (`objets_connectes`, `logiciel_saas`, `place_de_marche`, `influenceurs`) ; suivre les fiches UE et France (Data Act, P2B, influence commerciale) ; mettre à jour les CGU/CGV. |
 | Crée-t-elle un **nouveau rôle** ou de nouveaux droits ? | Mettre à jour le tableau des droits, les règles RLS, et les tests « A ne voit pas les données de B ». |
 | Touche-t-elle à l'**authentification**, aux fichiers envoyés, aux paiements, aux droits ? | Lancer `/security-review` après le développement. |
+| Corrige-t-elle une **faille de sécurité** ou change-t-elle de version ? | Noter la version et le correctif dans l'historique de `projet/maintenance-securite.md` ; régénérer la SBOM si c'est une version publiée. |
 | Change-t-elle quelque chose d'**important pour les utilisateurs** (nouvelles données, nouveau partenaire, prix) ? | Prévenir les utilisateurs (e-mail ou bannière) avant l'entrée en vigueur ; versionner la page légale. |
+| Ajoute-t-elle ou modifie-t-elle un **endroit affiché** (formulaire, fiche produit, panier, e-mail, écran d'abonnement, avis) ? | Reprendre la section correspondante de `legal/affichages-obligatoires.md` ; mettre à jour `config.cookies` si un cookie ou un traceur est ajouté ; `config.avis_clients = true` si des avis sont affichés. |
 
 ## Versionner les pages légales
 

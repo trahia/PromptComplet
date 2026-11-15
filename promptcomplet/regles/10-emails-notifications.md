@@ -36,6 +36,22 @@
   - objet non trompeur ;
   - désinscription traitée sous 10 jours ouvrés.
 - Preuve du consentement conservée (date, source, texte accepté).
+- **Pixels de suivi d'ouverture** (France, recommandation CNIL du 14/04/2026, délibération
+  2026-042) :
+  - c'est un traceur, soumis au **consentement** comme un cookie, distinct de l'accord pour
+    recevoir les e-mails ;
+  - l'inactivité vaut refus ;
+  - prévoir un lien de retrait de ce consentement en bas de chaque e-mail ;
+  - un message commercial glissé dans un e-mail transactionnel reste soumis au consentement ;
+  - par défaut, PromptComplet **désactive** le suivi d'ouverture.
+- **Prospection en France** :
+  - **par téléphone** : consentement préalable obligatoire depuis le 11/08/2026 (loi 2025-594,
+    art. 13 ; Bloctel n'est plus la règle). Consentement valable un an au plus, preuve conservée
+    3 ans. Appels en semaine, de 10 h à 13 h et de 14 h à 20 h ;
+  - **par e-mail vers des professionnels** : possible sans consentement préalable, seulement si le
+    message concerne leur métier, avec un moyen simple de s'opposer ;
+  - sources : https://www.cnil.fr/fr/demarchage-commercial et
+    https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/les-regles-du-demarchage-telephonique-simposant-aux-entreprises
 
 ## Notifications push
 
@@ -54,6 +70,12 @@
   - mention « STOP » ;
   - horaires et jours d'envoi autorisés selon le pays (voir la fiche pays).
 - Protections anti-fraude obligatoires (règle 01, « SMS pumping »).
+- **États-Unis** :
+  - enregistrement **A2P 10DLC** de la marque et de la campagne auprès du fournisseur de SMS
+    (sinon, les messages sont bloqués) ;
+  - **consentement écrit préalable** pour les SMS marketing (TCPA) ;
+  - horaires limités ;
+  - mots-clés STOP et HELP. ⚠️ Vérifier l'état des règles de la FCC.
 
 ## Centre de notifications dans l'app
 

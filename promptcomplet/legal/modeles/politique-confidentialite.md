@@ -62,6 +62,26 @@ Pour toute demande : [À COMPLÉTER : e-mail ou formulaire]. Nous répondons sou
 Tu peux aussi déposer une réclamation auprès de l'autorité de protection des données
 [À COMPLÉTER : ex. la CNIL, www.cnil.fr, pour la France].
 
+<!-- IA : France (loi Informatique et Libertés, art. 48 et 85) -->
+**Après ton décès** : tu peux définir des directives sur la conservation, l'effacement et la
+communication de tes données après ton décès, et désigner une personne chargée de les exécuter.
+Écris-nous à [À COMPLÉTER : e-mail]. Sans directive, tes héritiers peuvent demander la clôture de
+ton compte.
+
+<!-- IA : selon les pays visés (voir legal/affichages-obligatoires.md, section 12) :
+- États-Unis (CalOPPA, CCPA) : section en anglais sur la réponse aux signaux « Do Not Track » et
+  « Global Privacy Control », catégories de données et droits californiens ;
+- Québec : titre et coordonnées du responsable de la protection des renseignements personnels ;
+- Brésil : identité et contact de l'encarregado ;
+- Australie : décisions automatisées (depuis le 10/12/2026). -->
+
+## 6 bis. E-mails et pixels de suivi
+
+<!-- IA : seulement si newsletter ou e-mails marketing -->
+[À COMPLÉTER : « Nos e-mails ne contiennent aucun pixel de suivi », OU : « Avec ton accord, nos
+e-mails contiennent un pixel qui nous indique s'ils ont été ouverts. Tu peux retirer cet accord à
+tout moment via le lien en bas de chaque e-mail. »]
+
 ## 7. Sécurité
 
 Tes données sont chiffrées pendant leur transport (HTTPS) et sur nos serveurs. L'accès est limité

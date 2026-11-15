@@ -1,6 +1,6 @@
 # Suisse
 
-> Fiche mise à jour le 2026-11-11. Revérifier selon `methode/02-veille-legale.md`.
+> Fiche mise à jour le 2026-11-15. Revérifier selon `methode/02-veille-legale.md`.
 
 ## Données personnelles — nouvelle LPD (nLPD / revFADP), en vigueur depuis le 1er septembre 2023
 
@@ -30,6 +30,12 @@ qu'en UE.
 ## Langues
 
 Selon la région visée : allemand, français, italien.
+
+## TVA
+
+Une entreprise étrangère s'immatricule à la TVA suisse dès **100 000 CHF de chiffre d'affaires
+mondial**, si elle réalise des ventes en Suisse, y compris des services numériques. Source :
+https://www.estv.admin.ch/estv/fr/accueil/taxe-sur-la-valeur-ajoutee/tva-assujettissement/entreprises-etrangeres.html
 
 ## Sources officielles à consulter
 

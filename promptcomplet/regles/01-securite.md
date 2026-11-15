@@ -40,6 +40,14 @@ Lors de la veille, vérifie qu'aucune version plus récente n'est parue.
 - L'administration est séparée : rôle dédié, double authentification obligatoire, actions journalisées.
 - Les fichiers privés sont stockés dans un espace **privé**, et servis par des liens signés à durée
   courte.
+- **Les règles RLS filtrent les lignes, pas les colonnes.** Pour chaque table que le client peut
+  modifier, limite l'UPDATE aux colonnes autorisées (`revoke update …` puis
+  `grant update (colonne1, colonne2) …`) :
+  - les **rôles, abonnements, crédits, statuts de paiement et dates de consentement** ne sont
+    **jamais** modifiables par le client ;
+  - ils vont dans une table séparée, en lecture seule pour le client, écrite côté serveur ;
+  - test obligatoire : « un utilisateur ne peut pas changer son propre rôle ou abonnement »
+    (voir `kit/base-de-donnees/supabase-socle.sql`).
 
 ## 2. Chiffrement
 
@@ -62,7 +70,14 @@ Lors de la veille, vérifie qu'aucune version plus récente n'est parue.
 - Les secrets vont dans des variables d'environnement ou un gestionnaire de secrets. `.env` n'est
   jamais versionné. `.env.example` contient les noms, sans les valeurs.
 - Une clé par environnement (dev, staging, production). Clés restreintes quand c'est possible
-  (ex. clés restreintes Stripe). Rotation après tout doute.
+  (ex. clés restreintes Stripe).
+- **Rotation des clés** (remplacer une clé par une nouvelle, puis révoquer l'ancienne) :
+  - **immédiatement** en cas de doute ou de fuite possible, ou au départ d'une personne qui y
+    avait accès ;
+  - **au moins une fois par an** pour les clés serveur, sinon à la fréquence conseillée par le
+    fournisseur.
+  - Le calendrier est tenu dans `projet/maintenance-securite.md` : nom de la clé, date, prochaine
+    échéance, **jamais sa valeur**. C'est la personne qui crée et saisit les nouvelles clés.
 - Côté client, seules les clés **publiables** (publishable / anon) sont autorisées. La clé
   `service_role` / `sb_secret_` de Supabase, les clés secrètes Stripe, etc. restent côté serveur.
 - C'est la personne qui saisit les vraies clés. L'IA ne lit pas `.env` (verrou actif).
@@ -75,14 +90,32 @@ Lors de la veille, vérifie qu'aucune version plus récente n'est parue.
   de chaînes SQL.
 - Sorties : échappement automatique du framework. Pas de `dangerouslySetInnerHTML` / `innerHTML`
   sur du contenu non nettoyé (DOMPurify si indispensable). Jamais d'`eval`.
-- **Fichiers envoyés par les utilisateurs** :
-  - vérifier le vrai type (signature du fichier), la taille et le nombre ;
-  - renommer le fichier ;
-  - le stocker dans un espace privé ;
-  - réencoder les images, ce qui supprime aussi les métadonnées EXIF, dont la position GPS ;
+- **Fichiers envoyés par les utilisateurs** (`config.televersement_fichiers = true`). Tout se
+  fait **côté serveur** ; le contrôle du navigateur n'est qu'un confort :
+  - vérifier le vrai type grâce à la signature du fichier (`kit/web/security/upload-validation.ts`),
+    jamais grâce à l'extension ou au type annoncé par le navigateur ;
+  - limiter la taille, le nombre de fichiers et, pour les images, les dimensions (protection contre
+    les « bombes de décompression ») ;
+  - accepter une **liste blanche** de types. Refuser par défaut :
+    - **SVG**, qui peut contenir du code : le convertir en PNG s'il est indispensable ;
+    - HTML, exécutables et scripts ;
+    - archives (zip, rar), ou alors ne jamais les décompresser automatiquement côté serveur ;
+  - renommer le fichier (identifiant aléatoire) et le stocker dans un espace **privé** ;
+  - **réencoder les images**, par exemple avec `sharp`, qui supprime les métadonnées par défaut,
+    dont la position GPS EXIF. Garder ce comportement et ne pas réactiver la copie des métadonnées ;
+  - **analyse antivirus** avant de rendre un fichier visible à d'autres personnes : PDF, documents
+    Office, archives. Utiliser le service du fournisseur ou ClamAV ;
+  - servir les fichiers avec `Content-Disposition: attachment`, `X-Content-Type-Options: nosniff`
+    et une CSP `sandbox`. Pour les contenus publics, utiliser idéalement un **domaine séparé** du
+    site ;
   - ne jamais exécuter un fichier envoyé.
 - Fonctionnalités qui vont chercher une URL : protection SSRF (liste blanche, blocage des adresses
   internes).
+- **Opérations à usage limité** (code promo, crédits, stock, récompense unique, quota d'IA). Elles
+  sont vulnérables aux requêtes simultanées :
+  - transaction en base, avec contrainte d'unicité ou verrou de ligne ;
+  - clé d'idempotence sur les requêtes du client qui créent ou paient ;
+  - un test qui envoie 20 requêtes en même temps : une seule doit réussir.
 
 ## 5. Web : en-têtes et cookies
 
@@ -113,6 +146,9 @@ Lors de la veille, vérifie qu'aucune version plus récente n'est parue.
 - Journal de sécurité : échecs de connexion, refus d'accès, actions d'administration, changements
   de droits. Durée de conservation limitée et documentée.
 - Alertes sur les comportements anormaux.
+- Durée de conservation des journaux de sécurité : en principe **6 mois à 1 an**, selon la
+  recommandation de la CNIL sur la journalisation (⚠️ à vérifier). La durée est documentée dans le
+  registre des traitements.
 
 ## 8. Chaîne d'approvisionnement (dépendances)
 
@@ -128,6 +164,20 @@ Lors de la veille, vérifie qu'aucune version plus récente n'est parue.
 - GitHub Actions : versions figées par **SHA de commit complet**, et `permissions: contents: read`
   par défaut. Jamais de `pull_request_target`. Rappel : l'action Trivy a été compromise en mars 2026.
 - Jamais de `curl … | sh` ni d'installation depuis une source non officielle (verrou actif).
+- **Scripts d'installation des paquets bloqués**. Ils ont servi aux attaques « Shai-Hulud » sur npm
+  en 2025, et la CISA recommande de les bloquer depuis avril 2026 :
+  - pnpm (recommandé) : scripts bloqués par défaut depuis pnpm 10 ; n'autoriser que les paquets
+    indispensables (`onlyBuiltDependencies` dans `pnpm-workspace.yaml`) ;
+  - npm : `ignore-scripts=true` dans `.npmrc`, puis `npm rebuild <paquet>` pour les seuls paquets
+    qui en ont besoin.
+- **Délai avant d'adopter une nouvelle version**, car une version piégée est en général retirée en
+  quelques jours :
+  - pnpm : `minimumReleaseAge: 10080` (7 jours, exprimés en minutes) dans `pnpm-workspace.yaml` ;
+  - Dependabot : `cooldown` de 7 jours sur l'écosystème du projet ;
+  - ⚠️ npm : vérifier l'option équivalente dans la documentation de la version utilisée.
+- Le script de conformité avertit si ces réglages manquent.
+- Sources : https://www.cisa.gov/news-events/alerts/2025/09/23/widespread-supply-chain-compromise-impacting-npm-ecosystem
+  et https://pnpm.io/supply-chain-security
 
 ## 9. Infrastructure
 
@@ -140,6 +190,21 @@ Lors de la veille, vérifie qu'aucune version plus récente n'est parue.
   - règle 3-2-1 si possible (3 copies, 2 supports, 1 hors site) ;
   - **restauration testée** avant le lancement.
 - Protection DDoS et pare-feu applicatif (WAF) du fournisseur d'hébergement, s'ils sont disponibles.
+- **Nom de domaine** :
+  - verrou de transfert chez le registrar ;
+  - DNSSEC ;
+  - enregistrement CAA, qui limite les autorités de certification autorisées ;
+  - suppression des enregistrements DNS qui pointent vers un service arrêté (sinon, quelqu'un peut
+    reprendre le sous-domaine) ;
+  - domaine qui n'envoie pas d'e-mails : SPF `v=spf1 -all` et DMARC `p=reject` ;
+  - l'e-mail de récupération du compte registrar n'est **pas** une adresse de ce même domaine.
+- **Continuité si la personne n'est plus disponible** :
+  - codes de secours de la double authentification conservés hors ligne ;
+  - successeur ou second administrateur désigné là où c'est possible : successeur GitHub, contact
+    légataire Apple, second administrateur chez l'hébergeur et le registrar ;
+  - une fiche « comptes et qui appeler », rangée hors du projet et sans aucun mot de passe ;
+  - aucune boucle de récupération : l'e-mail qui permet de récupérer le registrar ne dépend pas du
+    domaine lui-même.
 
 ## 10. Applications mobiles (OWASP MASVS)
 
@@ -166,6 +231,47 @@ Lors de la veille, vérifie qu'aucune version plus récente n'est parue.
 | Vulnérabilités des dépendances (npm audit, OSV-Scanner, Trivy figé par empreinte) | à chaque push, et chaque semaine |
 | `/security-review` ou plugin `security-guidance` | à chaque fonctionnalité sensible |
 | Scan dynamique OWASP ZAP baseline | sur la préproduction, avant chaque lancement |
+| Liste des composants (SBOM, format CycloneDX) | à chaque version publiée (section 13) |
+| **Test d'intrusion par un professionnel** | voir ci-dessous |
+
+Les scanners automatiques ne trouvent pas les failles de logique, comme un utilisateur qui accède
+aux données d'un autre en changeant un numéro. Un **test d'intrusion humain** est donc :
+- **obligatoire avant le lancement** pour les données sensibles, une place de marché avec paiement
+  ou un public principalement mineur (le script de conformité exige `projet/test-intrusion.md`) ;
+- **recommandé** pour tout autre projet avec comptes utilisateurs ;
+- à refaire **chaque année** et après toute grosse évolution (authentification, paiement, rôles).
+
+Prestataires : en France, liste des prestataires qualifiés **PASSI** de l'ANSSI
+(https://cyber.gouv.fr). Plateforme de bug bounty européenne : YesWeHack. Le rapport reste privé.
+Dans `projet/test-intrusion.md`, on note seulement la date, le prestataire, le périmètre, le nombre
+de failles par gravité et leur statut de correction.
+
+## 13. Maintenance de sécurité et durée de support (après le lancement)
+
+La directive européenne 2024/2853 rend le créateur d'un logiciel responsable, même sans faute, des
+dommages causés par un défaut. L'**absence de mise à jour de sécurité** en fait partie
+(`legal/pays/union-europeenne.md`). Le Cyber Resilience Act impose, de son côté, de gérer les
+vulnérabilités des apps et logiciels distribués. Le fichier `projet/maintenance-securite.md` est
+donc exigé dès la construction. Il contient :
+
+- la **durée de support** annoncée aux utilisateurs : pendant combien de temps l'app ou le site
+  reçoit des correctifs de sécurité. Au moins la durée d'usage raisonnable du produit, jamais moins
+  de la durée d'engagement d'un abonnement ;
+- les **délais de correction** visés :
+  - faille critique : sous 7 jours, et sous 24 à 72 h si elle est activement exploitée ;
+  - faille haute : sous 30 jours ;
+  - autres failles : à la version suivante ;
+- le **calendrier de rotation des clés** (section 3) ;
+- l'**historique des versions** : date, version, correctifs de sécurité. C'est la preuve que les
+  mises à jour ont été faites ;
+- la **veille des vulnérabilités** : Dependabot, OSV-Scanner et alertes des fournisseurs, avec la
+  personne à prévenir ;
+- la **liste des composants (SBOM)**, générée à chaque version publiée, en CycloneDX :
+  - projet npm : `npm sbom --sbom-format cyclonedx --omit dev > projet/sbom.cdx.json` ;
+  - pnpm, mobile (Gradle, Swift) ou plusieurs langages : `cdxgen` (projet OWASP CycloneDX,
+    https://github.com/CycloneDX/cdxgen) ;
+  - le fichier `projet/sbom.cdx.json` est exigé au lancement ;
+- la mention de l'assurance **responsabilité civile professionnelle**, à vérifier par la personne.
 
 ## Interdits absolus
 

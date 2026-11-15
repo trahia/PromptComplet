@@ -80,6 +80,26 @@
     "contenu_utilisateurs": { "type": "boolean" },
     "place_de_marche": { "type": "boolean" },
     "ia_dans_le_produit": { "type": "boolean" },
+    "televersement_fichiers": { "type": "boolean", "description": "Les utilisateurs peuvent envoyer des fichiers (photos, documents…). Règle 01, section 4." },
+    "logiciel_saas": { "type": "boolean", "description": "Logiciel en ligne que des clients utilisent pour gérer leurs propres données (Data Act, chapitre VI)." },
+    "objets_connectes": { "type": "boolean", "description": "Objet connecté ou service lié à un objet (Data Act, chapitre II)." },
+    "influenceurs": { "type": "boolean", "description": "Promotion par des influenceurs ou créateurs de contenu (loi française 2023-451)." },
+    "avis_clients": { "type": "boolean", "description": "Le service affiche des avis ou des notes d'utilisateurs (Code conso L111-7-2)." },
+    "cookies": {
+      "type": "array",
+      "description": "Chaque cookie ou traceur réellement déposé (vérifié dans le navigateur). Chaque nom et chaque fournisseur doit apparaître dans la page cookies.",
+      "items": {
+        "type": "object",
+        "required": ["nom", "fournisseur", "finalite", "duree", "categorie"],
+        "properties": {
+          "nom": { "type": "string" },
+          "fournisseur": { "type": "string" },
+          "finalite": { "type": "string" },
+          "duree": { "type": "string" },
+          "categorie": { "enum": ["necessaire", "mesure", "publicite", "contenus-tiers", "preferences"] }
+        }
+      }
+    },
     "donnees_sensibles": { "type": "array", "items": { "enum": ["sante", "biometrie", "genetique", "origine", "opinions", "religion", "syndicat", "orientation", "infractions", "localisation-precise", "piece-identite", "financier"] } },
     "donnees": {
       "type": "array",

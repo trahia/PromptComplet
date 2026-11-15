@@ -6,5 +6,5 @@
 useDefault = true
 
 [allowlist]
-description = "Empreintes SHA-256 des fichiers de la méthode : ce ne sont pas des secrets."
-paths = ['''promptcomplet/integrite\.json''']
+description = "Empreintes de fichiers, qui ne sont pas des secrets : méthode (SHA-256) et liste des composants SBOM générée depuis le lockfile."
+paths = ['''promptcomplet/integrite\.json''', '''projet/sbom\.cdx\.json''']

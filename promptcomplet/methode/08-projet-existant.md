@@ -1,5 +1,18 @@
 # Ajouter PromptComplet à un projet qui existe déjà
 
+> **Si la personne veut d'abord savoir où elle en est sans rien changer**, utilise
+> `09-audit-seul.md` : analyse en lecture seule, liste des problèmes dans la discussion, aucune
+> installation. L'installation ci-dessous, elle, **ajoute des fichiers au projet**.
+
+## Ce que l'installation change dans le projet (à annoncer avant)
+
+- Elle ajoute `promptcomplet/`, `CLAUDE.md`, `AGENTS.md`, `.claude/`, `.githooks/`, `.gitleaks.toml`,
+  `projet/` et 3 workflows GitHub (sécurité, conformité, ZAP). Elle n'écrase aucun fichier existant.
+- Les crochets git existants (Husky, Lefthook…) ne sont **pas** remplacés : l'installateur explique
+  comment y ajouter le contrôle PromptComplet.
+- Les workflows de sécurité peuvent **passer au rouge** sur un code existant, tant que les problèmes ne
+  sont pas corrigés. C'est voulu, mais il faut le dire avant.
+
 ## Installation
 
 1. Fais une sauvegarde : vérifie que tout est commité (`git status`), sinon propose un commit.

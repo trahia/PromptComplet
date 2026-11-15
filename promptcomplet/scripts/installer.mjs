@@ -118,8 +118,19 @@ function configurerGit() {
       ok(`Lien « ${nom} » vers le dépôt modèle supprimé.`);
     }
   }
-  const h = git('config', 'core.hooksPath', '.githooks');
-  if (h.status === 0) ok('Contrôle avant commit activé (core.hooksPath = .githooks).');
+  // Ne jamais remplacer les crochets git d'un projet existant (Husky, Lefthook…) : ils seraient
+  // désactivés sans prévenir. Dans ce cas, on explique comment ajouter le contrôle PromptComplet.
+  const actuel = (git('config', '--get', 'core.hooksPath').stdout || '').trim();
+  const crochetsExistants = !actuel && fs.existsSync(path.join(cible, '.git', 'hooks', 'pre-commit'));
+  if ((actuel && actuel !== '.githooks') || crochetsExistants) {
+    console.log(`⚠ Le projet a déjà ses propres crochets git (${actuel || '.git/hooks/pre-commit'}) : NON remplacés.`);
+    note('Pour activer le contrôle PromptComplet sans casser les tiens, ajoute ces deux lignes à ton crochet pre-commit :');
+    note('  node promptcomplet/scripts/scanner-secrets.mjs --staged || exit 1');
+    note('  node promptcomplet/scripts/verifier-conformite.mjs --pre-commit || exit 1');
+  } else {
+    const h = git('config', 'core.hooksPath', '.githooks');
+    if (h.status === 0) ok('Contrôle avant commit activé (core.hooksPath = .githooks).');
+  }
   try { fs.chmodSync(path.join(cible, '.githooks', 'pre-commit'), 0o755); } catch { /* Windows */ }
 }
 

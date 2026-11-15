@@ -1,6 +1,6 @@
 # France
 
-> Fiche mise à jour le 2026-11-11. À lire avec `union-europeenne.md`. Revérifier selon `methode/02-veille-legale.md`.
+> Fiche mise à jour le 2026-11-15. À lire avec `union-europeenne.md`. Revérifier selon `methode/02-veille-legale.md`.
 
 ## Données personnelles
 
@@ -45,6 +45,63 @@
 - **Facturation électronique** entre entreprises : réception obligatoire pour toutes les
   entreprises, puis émission selon un calendrier par taille. ⚠️ Vérifier les dates en vigueur sur
   impots.gouv.fr.
+- **Bouton de commande** « Commande avec obligation de paiement » ou formule sans ambiguïté, à peine
+  de nullité (L221-14). **Formulaire type de rétractation** joint aux CGV et à la confirmation
+  (annexe R221-1).
+- **Encadré officiel des garanties légales** dans les CGV, copié du modèle annexé à D211-2
+  (décret 2022-946, depuis le 01/10/2022).
+- **Réductions de prix** : prix de référence = prix le plus bas des 30 derniers jours (L112-1-1).
+- **Avis en ligne** (L111-7-2, D111-16 à D111-19) :
+  - dire si les avis sont contrôlés, et comment ;
+  - dater chaque avis ;
+  - motiver un refus de publication.
+  Source : https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000049571119
+- **Archivage** des contrats de 120 € ou plus pendant 10 ans, avec accès pour le client (L213-1,
+  D213-1).
+- **Rappel avant reconduction tacite** des contrats à durée déterminée (L215-1, loi Chatel).
+- **Clients professionnels** : pénalités de retard et indemnité forfaitaire de 40 € dans les CGV et
+  sur les factures (Code de commerce L441-10, D441-5).
+- **Démarchage téléphonique** : consentement préalable obligatoire depuis le 11/08/2026 (loi
+  2025-594). Voir `regles/10-emails-notifications.md`.
+- **Jeux-concours et loteries publicitaires** : règlement accessible gratuitement, participation
+  sans obligation d'achat. ⚠️ Vérifier les règles en vigueur. Les jeux d'argent en ligne exigent un
+  agrément de l'ANJ.
+
+## Hébergement de contenus d'utilisateurs
+
+- **Conservation des données d'identification** (décret 2021-1362) : un service qui héberge des
+  contenus publiés par les utilisateurs conserve, à part et à accès restreint :
+  - les identifiants de création du compte, pendant 1 an après sa fermeture ;
+  - les données de paiement et de connexion, pendant 1 an ;
+  - l'identité civile, pendant 5 ans si elle est collectée.
+  Ces données ne sont remises qu'aux autorités habilitées. ⚠️ Vérifier le texte en vigueur :
+  https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000044228912
+- **Mort numérique** (loi Informatique et Libertés, art. 48 et 85) : la politique de
+  confidentialité informe du droit de donner des directives post-mortem. Source :
+  https://www.cnil.fr/fr/mort-numerique-effacement-informations-personne-decedee
+
+## Influence commerciale (loi 2023-451 du 9 juin 2023)
+
+À appliquer si le projet fait la promotion de ses produits avec des influenceurs ou des créateurs
+de contenu, payés ou rémunérés en produits :
+
+- la publication doit afficher clairement **« Publicité »** ou **« Collaboration commerciale »**,
+  pendant toute sa durée ;
+- certaines images retouchées ou créées par IA doivent porter la mention **« Image retouchée »** ou
+  **« Image virtuelle »** ;
+- certaines promotions sont interdites ou très encadrées : chirurgie esthétique, produits à base de
+  nicotine, certains produits financiers et crypto-actifs, jeux d'argent… ;
+- un **contrat écrit** est obligatoire au-delà d'un seuil fixé par décret ;
+- l'annonceur peut être tenu **responsable avec l'influenceur** des dommages causés aux tiers.
+
+⚠️ La loi a été modifiée en 2024 (ordonnance 2024-978) pour la rendre conforme au droit européen.
+Vérifier la version en vigueur sur Légifrance et le guide de la DGCCRF.
+
+## Responsabilité du fait des produits
+
+La directive (UE) 2024/2853 (voir la fiche UE) fait entrer le logiciel dans le régime des produits
+défectueux à partir du 9 décembre 2026. ⚠️ Au 2026-11-15, aucun texte français de transposition n'a
+été trouvé : le vérifier sur Légifrance et sur les sites de l'Assemblée nationale et du Sénat.
 
 ## Langue (loi Toubon, 94-665, art. 2)
 
@@ -78,3 +135,5 @@ les contrats d'adhésion (CGU, CGV) et les garanties. Contrôlé par la DGCCRF, 
 - Accessibilité numérique (RGAA) : https://accessibilite.numerique.gouv.fr
 - Arcom : https://www.arcom.fr
 - Impôts (facturation électronique) : https://www.impots.gouv.fr
+- Influence commerciale (DGCCRF) : https://www.economie.gouv.fr/dgccrf
+- Assemblée nationale : https://www.assemblee-nationale.fr · Sénat : https://www.senat.fr

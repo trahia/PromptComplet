@@ -1,6 +1,6 @@
 {
   "$schema": "../promptcomplet/schemas/config.schema.json",
-  "version_methode": "1.0.0",
+  "version_methode": "1.1.0",
   "statut": "construction",
   "porteur": { "prenom": "Alex", "langue": "fr" },
   "etablissement": { "pays": "FR", "statut_juridique": "micro-entreprise" },
@@ -31,6 +31,10 @@
   "contenu_utilisateurs": false,
   "place_de_marche": false,
   "ia_dans_le_produit": false,
+  "televersement_fichiers": false,
+  "logiciel_saas": false,
+  "objets_connectes": false,
+  "influenceurs": false,
   "donnees_sensibles": [],
   "donnees": [
     { "nom": "adresse e-mail", "finalite": "création et gestion du compte", "base_legale": "contrat", "conservation": "durée du compte", "obligatoire": true },

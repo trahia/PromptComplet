@@ -11,7 +11,7 @@ create table if not exists public.profiles (
   display_name text check (char_length(display_name) <= 80),
   locale text not null default 'fr' check (locale ~ '^[a-z]{2,3}(-[A-Z]{2})?$'),
   marketing_opt_in boolean not null default false,
-  marketing_opt_in_at timestamptz,
+  marketing_opt_in_at timestamptz, -- date du dernier choix : remplie par le serveur (déclencheur), jamais par le client
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
@@ -26,6 +26,14 @@ create policy "profiles : modification de son propre profil"
   using ((select auth.uid()) = id)
   with check ((select auth.uid()) = id);
 -- Pas de règle insert/delete : création par le déclencheur ci-dessous, suppression en cascade avec le compte.
+
+-- IMPORTANT : les règles RLS filtrent les LIGNES, pas les COLONNES. Sans les deux lignes suivantes, un
+-- utilisateur pourrait modifier N'IMPORTE QUELLE colonne de son propre profil (date de consentement,
+-- et demain un rôle, un abonnement ou des crédits). On n'autorise que les colonnes modifiables.
+-- Règle : rôles, abonnements, crédits et statuts ne vont JAMAIS dans « profiles » ; ils vont dans une
+-- table séparée que le client peut seulement lire, écrite côté serveur (clé service ou webhook).
+revoke update on public.profiles from anon, authenticated;
+grant update (display_name, locale, marketing_opt_in) on public.profiles to authenticated;
 
 create or replace function public.handle_new_user()
 returns trigger language plpgsql security definer set search_path = ''
@@ -54,6 +62,23 @@ drop trigger if exists profiles_updated_at on public.profiles;
 create trigger profiles_updated_at
   before update on public.profiles
   for each row execute function public.set_updated_at();
+
+-- Preuve du consentement marketing : horodatée par le serveur à chaque changement de choix.
+create or replace function public.profiles_consent_timestamp()
+returns trigger language plpgsql set search_path = ''
+as $$
+begin
+  if new.marketing_opt_in is distinct from old.marketing_opt_in then
+    new.marketing_opt_in_at = now();
+  end if;
+  return new;
+end;
+$$;
+
+drop trigger if exists profiles_consent_timestamp on public.profiles;
+create trigger profiles_consent_timestamp
+  before update on public.profiles
+  for each row execute function public.profiles_consent_timestamp();
 
 -- ---------------------------------------------------------------------------
 -- Journal d'audit des actions sensibles (connexion admin, changement de droits, export, suppression…)
@@ -124,4 +149,10 @@ create policy "stockage : supprimer ses propres fichiers"
 -- create policy "items : modification" on public.items for update to authenticated using ((select auth.uid()) = owner_id) with check ((select auth.uid()) = owner_id);
 -- create policy "items : suppression" on public.items for delete to authenticated using ((select auth.uid()) = owner_id);
 -- create index on public.items (owner_id);
--- Puis : un test automatique « l'utilisateur A ne voit pas les items de B » (tests/security/).
+-- Colonnes que le client ne doit pas changer (owner_id, statut, prix…) : limiter l'UPDATE aux colonnes
+-- autorisées, comme pour « profiles » :
+-- revoke update on public.items from anon, authenticated;
+-- grant update (title) on public.items to authenticated;
+-- Puis des tests automatiques (tests/security/) :
+--   « l'utilisateur A ne voit pas les items de B » ;
+--   « un utilisateur ne peut pas modifier son propre rôle, abonnement ou date de consentement ».

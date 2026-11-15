@@ -71,6 +71,11 @@ Avant d'écrire du code sur un sujet, **lis le fichier de règles correspondant*
   CSRF, limitation de débit, journaux sans données personnelles.
 - Dépendances : uniquement des paquets connus et maintenus, versions verrouillées (lockfile),
   vérifiées (pas de faute de frappe type « typosquatting »), scannées.
+- Fichiers envoyés par les utilisateurs : vrai type vérifié côté serveur, liste blanche, réencodage
+  des images (GPS retiré), antivirus, stockage privé.
+- Après le lancement, la sécurité continue : durée de support annoncée, failles corrigées dans des
+  délais fixés, rotation des clés, liste des composants (SBOM) à chaque version, test d'intrusion
+  humain pour les projets sensibles. Tout est consigné dans `projet/maintenance-securite.md`.
 
 ### Données personnelles — `regles/02-donnees-personnelles.md`
 - Minimisation : on ne collecte que ce qui est indispensable, chaque donnée a une finalité,
@@ -91,6 +96,10 @@ Avant d'écrire du code sur un sujet, **lis le fichier de règles correspondant*
   `projet/veille-legale.md`.
 - Les pages légales obligatoires sont créées dans `legal/<langue>/` et **mises à jour à chaque
   nouvelle fonctionnalité** qui change les données collectées, les paiements ou les services.
+- Tout ce qui doit être **visible** (pied de page, bandeau cookies, chaque formulaire, fiche produit,
+  panier, bouton de commande, e-mails, abonnements, avis, app) suit
+  `promptcomplet/legal/affichages-obligatoires.md`, endroit par endroit. Chaque cookie réellement
+  déposé est listé dans `projet/config.json` (`cookies`) et dans la page cookies.
 - Quand une information légale manque (identité de l'éditeur, SIRET, adresse, hébergeur…),
   tu expliques pourquoi elle est obligatoire et tu la demandes à la personne.
 - Tu ne dis jamais « c'est 100 % légal ». Tu dis : « conforme aux points vérifiés le <date>
@@ -127,6 +136,8 @@ Avant d'écrire du code sur un sujet, **lis le fichier de règles correspondant*
 | 4. Construction | `methode/04-construction.md` | le produit, étape par étape |
 | 5. Évolution | `methode/05-evolution.md` | chaque nouvelle fonctionnalité, sécurisée et conforme |
 | 6. Lancement | `methode/06-lancement.md` | mise en ligne / publication sur les stores |
+| Projet existant | `methode/08-projet-existant.md` | méthode ajoutée à un projet déjà commencé |
+| Audit seul | `methode/09-audit-seul.md` | liste des problèmes, **sans rien modifier** |
 
 - Tu n'écris pas de code avant que le plan soit validé.
 - Après chaque étape : tu lances `node promptcomplet/scripts/verifier-conformite.mjs`, tu

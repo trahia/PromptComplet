@@ -207,10 +207,24 @@ Un ou deux appels de questions à cocher :
    précise, pièces d'identité, données bancaires ? (Aucune / Oui, lesquelles). Si c'est la santé
    en France, l'hébergeur doit être certifié **HDS** : signale-le.
 5. **Newsletter ou e-mails promotionnels** ? (Oui / Non)
-6. **Budget mensuel** pour les services (hébergement, e-mails…) : 0 € pour commencer / moins de 50 € /
+6. **Ce que les utilisateurs peuvent faire ou ce que tu vends** (cases à cocher, plusieurs
+   réponses possibles). Chaque réponse cochée déclenche des règles précises :
+   - **Envoyer des fichiers** (photos, documents, CV…) → `televersement_fichiers` : contrôles
+     anti-virus et anti-piratage (règle 01, section 4) ;
+   - **Logiciel en ligne que des clients paient pour gérer leurs propres données** (SaaS) →
+     `logiciel_saas` : dans l'UE, le Data Act impose de pouvoir partir avec ses données ;
+   - **Objet connecté** (montre, capteur, appareil relié à l'app) → `objets_connectes` : Data Act ;
+   - **Promotion par des influenceurs ou créateurs de contenu** → `influenceurs` : mentions
+     obligatoires (en France, loi de 2023) ;
+   - **Vendeurs professionnels sur ta place de marché** → règlement européen P2B (règles envers les
+     vendeurs) ;
+   - **Afficher des avis ou des notes** → `avis_clients` : obligations de transparence et
+     interdiction des faux avis ;
+   - Rien de tout cela.
+7. **Budget mensuel** pour les services (hébergement, e-mails…) : 0 € pour commencer / moins de 50 € /
    moins de 200 € / plus
-7. **Identité visuelle** : logo, couleurs, police déjà choisis ? Des exemples de styles aimés ?
-8. **Date de lancement** souhaitée ?
+8. **Identité visuelle** : logo, couleurs, police déjà choisis ? Des exemples de styles aimés ?
+9. **Date de lancement** souhaitée ?
 
 ## Q11 — Récapitulatif et validation
 

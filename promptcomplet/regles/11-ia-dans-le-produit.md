@@ -11,6 +11,9 @@ résumé, recommandations, classement, analyse de photos ou de voix.
 - Les hypertrucages (deepfakes) sont signalés.
 - Vérifie l'état exact des obligations pendant la veille légale, ainsi que les ajustements
   du « Digital Omnibus ».
+- **Maîtrise de l'IA** (AI Act, art. 4) : les personnes qui utilisent ou opèrent l'IA du produit sont
+  formées à ses limites. ⚠️ L'Omnibus IA (2026/1744) a assoupli cette obligation : vérifier la version
+  consolidée sur EUR-Lex.
 
 ## Interdits et cas à haut risque
 

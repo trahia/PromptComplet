@@ -47,6 +47,15 @@
 - Réinitialisation de mot de passe : lien à usage unique, valable 15 à 60 minutes. Elle invalide les
   sessions ouvertes.
 - Vérification de l'e-mail avant toute action sensible.
+- **Redirections après connexion** (`next`, `returnTo`, `redirect`) : uniquement vers une liste
+  blanche de chemins internes. Jamais une URL complète fournie par la requête (redirection ouverte,
+  utilisée pour l'hameçonnage).
+- **Changement d'adresse e-mail** :
+  - nouvelle authentification obligatoire ;
+  - confirmation par un lien envoyé à la **nouvelle** adresse ;
+  - notification à l'**ancienne** adresse, avec un moyen d'annuler.
+- Même règle pour le changement de mot de passe, de numéro de téléphone ou de double
+  authentification.
 
 ## Connexions via un compte existant (OAuth / OpenID Connect)
 
