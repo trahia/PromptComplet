@@ -5,6 +5,7 @@ import path from 'node:path';
 
 export const STATUTS = ['questionnaire', 'plan', 'construction', 'lancement', 'production'];
 export const TYPES = ['site', 'app', 'app+site', 'entreprise', 'autre'];
+export const FORMES_APP = ['aucune', 'pwa', 'enveloppe', 'native'];
 export const BASES_LEGALES = ['consentement', 'contrat', 'obligation-legale', 'interet-legitime', 'interet-vital', 'mission-publique'];
 
 export function niveauStatut(statut) {
@@ -38,8 +39,20 @@ export function validerConfig(c) {
   if (c.projet?.type === 'autre' && !c.projet.precision_type) e.push('projet.precision_type est obligatoire quand le type est « autre »');
   const plateformes = c.projet?.plateformes || [];
   if (!estListe(plateformes)) e.push('projet.plateformes doit être une liste (web, ios, android…)');
-  if (['app', 'app+site'].includes(c.projet?.type) && !plateformes.some((p) => p === 'ios' || p === 'android')) {
-    e.push('projet.plateformes doit contenir « ios » et/ou « android » pour une application');
+  const forme = c.projet?.forme_app;
+  const stores = estListe(plateformes) && plateformes.some((p) => p === 'ios' || p === 'android');
+  if (forme !== undefined && !FORMES_APP.includes(forme)) e.push(`projet.forme_app invalide : attendu ${FORMES_APP.join(', ')}`);
+  if (['app', 'app+site'].includes(c.projet?.type) && !['pwa', 'enveloppe', 'native'].includes(forme) && !stores) {
+    e.push('projet.plateformes doit contenir « ios » et/ou « android » pour une application des stores (ou projet.forme_app « pwa » pour une app web)');
+  }
+  if (['enveloppe', 'native'].includes(forme) && !stores) {
+    e.push(`projet.forme_app « ${forme} » : indique « ios » et/ou « android » dans projet.plateformes`);
+  }
+  if (forme === 'pwa' && stores) {
+    e.push('projet.forme_app « pwa » : une app web n’est pas publiée dans les stores. Retire « ios »/« android » de projet.plateformes, ou choisis « enveloppe » ou « native »');
+  }
+  if (forme === 'pwa' && estListe(plateformes) && !plateformes.includes('web')) {
+    e.push('projet.forme_app « pwa » : une app web est un site, ajoute « web » dans projet.plateformes');
   }
 
   if (!estListe(c.pays_cibles) || c.pays_cibles.length === 0 || !c.pays_cibles.every(codePays)) {

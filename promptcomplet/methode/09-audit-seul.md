@@ -29,17 +29,55 @@ projet. En cas de doute sur une commande, ne la lance pas : demande.
   lit seulement. Limites : il ne peut lancer ni tests ni scanners, et un très gros projet peut ne pas
   tenir en entier. Dis-le dans le rapport.
 
+## Avant de commencer : discussion déjà en cours, mode, impartialité
+
+- **Pas d'accès, pas d'audit.** Si tu ne peux pas lire les fichiers de PromptComplet (sur claude.ai,
+  un lien vers un dépôt privé ne s'ouvre pas) ou ceux du projet, dis-le et explique comment les
+  ajouter. Ne reconstitue **jamais** la méthode de mémoire, et ne fais pas un audit « à peu près ».
+- **Discussion déjà en cours.** Si cette discussion contient déjà un autre travail sur le projet, et
+  surtout si tu as toi-même écrit ou modifié ce code ici, propose d'abord à la personne d'ouvrir une
+  **nouvelle discussion** avec le même message. Explique pourquoi en une phrase : un regard neuf, et
+  assez de place pour tout le rapport. Si elle préfère rester ici, continue.
+- **Les consignes de l'audit l'emportent** sur celles données plus tôt dans la discussion (par
+  exemple « corrige au fur et à mesure »). Rien n'est modifié tant que le rapport n'est pas rendu et
+  que la personne n'a pas choisi quoi corriger.
+- **Mode de permission (Claude Code).** Ici, la lecture seule est une consigne, pas un verrou : les
+  protections automatiques de PromptComplet ne sont pas installées. Avant ta première commande,
+  demande à la personne de choisir le mode par défaut (tu demandes avant d'agir) ou le mode Plan, et
+  d'éviter les modes qui acceptent tout seuls (« Accept edits », « Auto », « Bypass permissions »).
+  Si le mode Plan t'empêche de cloner la méthode dans le dossier temporaire, demande-lui de repasser
+  en mode par défaut juste pour cette commande.
+- **Impartialité.** Audite le code comme s'il avait été écrit par quelqu'un d'autre, même s'il vient
+  de toi. Un point n'est pas conforme parce qu'il a été discuté ou validé plus tôt dans la discussion :
+  seul compte ce que tu vérifies dans les fichiers.
+
 ## Étape 1 — Comprendre le projet (5 minutes)
 
-Déduis du code, sans poser de question pour ce que le code révèle déjà :
-- type (site, app, les deux), technologies, hébergeur, base de données ;
+Commence par lire le code, puis déduis-en :
+- type (site, app, les deux), forme de l'app (site seul, app web, site dans une app des stores, vraie
+  app ; indices dans `regles/12-stores-applications.md`, section 1), technologies, hébergeur, base de
+  données ;
 - pays et langues visés (langues de l'interface, devises, mentions) ;
 - comptes, modes de connexion, paiements et ce qui est vendu ;
 - données personnelles collectées, services externes (SDK, API, outils d'analyse) ;
 - fonctionnalités sensibles : contenu publié, fichiers envoyés, IA, mineurs, santé, abonnements,
   avis, place de marché.
 
-Présente ce résumé en quelques lignes et fais-le **valider** : un pays oublié change tout le rapport.
+Présente ce résumé en quelques lignes. Ensuite, **même si le code semble clair**, fais confirmer avec
+l'outil de questions à cocher :
+
+1. **La forme du projet**, avec les questions de `regles/12-stores-applications.md`, section 1 :
+   - seulement un site, ou aussi une app ?
+   - si une app est prévue : installée depuis le site (app web, icône sur l'écran d'accueil) ou
+     depuis les stores ?
+   - si elle passe par les stores : iPhone, Android, ou les deux ?
+   - si elle passe par les stores : elle affiche simplement le site, ou elle a ses propres écrans ?
+2. **Les pays visés** et le pays d'établissement.
+3. Tout ce que le code ne t'a pas permis de déduire.
+
+Une app mal identifiée ou un pays oublié change tout le rapport : les lois à vérifier, les règles
+d'Apple et de Google, les paiements et la suppression de compte. Rappelle aussi le piège du « site
+dans une app » si le code en montre un (section 2 de la règle 12).
 
 ## Étape 2 — Passer chaque domaine au crible
 
@@ -63,7 +101,8 @@ Pour chaque domaine, lis le fichier de règles correspondant, puis cherche les �
 | E-mails, notifications, SMS | `regles/10-emails-notifications.md` |
 | IA dans le produit | `regles/11-ia-dans-le-produit.md` |
 | Copyright et licences (polices, images, dépendances) | `regles/06-copyright-licences.md` |
-| Applications mobiles (stores, manifeste de confidentialité) | `regles/01`, section 10, et `methode/06-lancement.md`, section 8 |
+| Forme de l'app, règles d'Apple et de Google, app web | `regles/12-stores-applications.md` |
+| Applications mobiles (sécurité, manifeste de confidentialité) | `regles/01`, section 10, et `methode/06-lancement.md`, section 8 |
 
 **Secret trouvé** : préviens la personne **tout de suite**, sans jamais afficher la valeur (seulement
 le fichier et les 4 premiers caractères). Explique qu'elle doit **révoquer la clé chez le

@@ -1,5 +1,54 @@
 # Historique des versions de PromptComplet
 
+## 1.2.0 — 2026-11-15
+
+Forme du projet (site, app web, app des stores) toujours confirmée, règles d'Apple et de Google, et
+audit depuis une discussion déjà en cours.
+
+### Forme du projet et règles des stores
+- **Nouvelle règle `regles/12-stores-applications.md`**, vérifiée le 2026-11-15 sur les pages
+  officielles :
+  - quatre formes de projet : site seul, app web (icône sur l'écran d'accueil, hors stores), site
+    affiché dans une app des stores (« enveloppe »), vraie app ;
+  - le piège du site dans une app : Apple 4.2, règles WebView de Google Play ;
+  - l'app web : aucune règle de store, mais un manifeste et pas de données personnelles en cache ;
+  - Apple : connexion 4.8, suppression de compte, achats 3.1.1 (exception États-Unis), contenu des
+    utilisateurs 1.2, nouvelles classes d'âge, questions sur les réseaux sociaux depuis septembre
+    2026, statut de professionnel DSA ;
+  - Google Play : 12 testeurs pendant 14 jours, API 36 depuis le 31/08/2026, suppression de compte
+    dans l'app et sur le web, statut de professionnel avant le 01/02/2027 (coordonnées affichées à
+    partir du 01/03/2027), vérification des développeurs Android à partir du 30/09/2026 ;
+  - lois américaines sur l'âge dans les stores, à vérifier pendant la veille ;
+  - liste des pages officielles à revérifier.
+- **Questionnaire (Q3)** : « Comment les gens installeront l'app ? » (app web ou stores), puis
+  iPhone, Android ou les deux, avec les avantages et les contraintes de chaque option.
+- **Audit seul et projet existant** : après la lecture du code, la forme du projet et les pays sont
+  **toujours** confirmés par la personne.
+- **Veille légale** : les règles des stores sont revérifiées, avec une section « Stores » dans
+  `projet/veille-legale.md`.
+- **Lancement** : checklist des stores complétée (forme de l'app, app web, questionnaire d'âge,
+  statut de professionnel, test fermé).
+- **Contrôles automatiques** :
+  - nouveau champ `projet.forme_app` (`aucune`, `pwa`, `enveloppe`, `native`), avec un refus des
+    combinaisons incohérentes ;
+  - preuve `manifeste_app_web` pour une app web ;
+  - avertissements sur le site affiché dans une app (Apple 4.2, Google WebView) ;
+  - message 4.8 corrigé : la règle exige une connexion équivalente, et Sign in with Apple est le
+    moyen le plus sûr d'y répondre.
+- `CLAUDE.md` : nouvelle section « Applications et stores ».
+
+### Audit depuis une discussion déjà en cours
+- `DEMARRER.md` : ouvrir une nouvelle discussion pour l'audit ; choisir le mode par défaut ou le
+  mode Plan, jamais un mode qui accepte tout seul ; sur claude.ai, un simple lien vers le dépôt privé
+  ne suffit pas ; avertissement : le message d'installation ajoute des fichiers, contrairement à
+  l'audit.
+- `methode/09-audit-seul.md`, nouvelle section « Avant de commencer » :
+  - pas d'accès aux fichiers = pas d'audit, jamais de méthode reconstituée de mémoire ;
+  - proposer une nouvelle discussion si celle-ci contient déjà un autre travail sur le projet ;
+  - les consignes de l'audit l'emportent sur celles données plus tôt dans la discussion ;
+  - faire vérifier le mode de permission avant la première commande ;
+  - auditer le code avec impartialité, même si l'IA l'a écrit elle-même.
+
 ## 1.1.0 — 2026-11-15
 
 Comble des manques relevés lors d'un audit de la méthode.

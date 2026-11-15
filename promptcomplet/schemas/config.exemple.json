@@ -1,6 +1,6 @@
 {
   "$schema": "../promptcomplet/schemas/config.schema.json",
-  "version_methode": "1.1.0",
+  "version_methode": "1.2.0",
   "statut": "construction",
   "porteur": { "prenom": "Alex", "langue": "fr" },
   "etablissement": { "pays": "FR", "statut_juridique": "micro-entreprise" },
@@ -8,6 +8,7 @@
     "nom": "Exemple",
     "type": "app+site",
     "plateformes": ["web", "ios", "android"],
+    "forme_app": "native",
     "description": "Exemple fictif utilisé pour illustrer le format.",
     "public_cible": "Adultes en France et en Belgique"
   },

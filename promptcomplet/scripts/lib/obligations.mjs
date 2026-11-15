@@ -35,6 +35,7 @@ export function calculerObligations(c) {
   const plateformes = c.projet?.plateformes || [];
   const ios = plateformes.includes('ios');
   const android = plateformes.includes('android');
+  const forme = c.projet?.forme_app;
   const comptes = c.comptes_utilisateurs === 'oui' || c.comptes_utilisateurs === 'optionnel';
   const paiement = c.paiement?.actif === true;
   const connexions = (c.connexions || []).map((x) => String(x).toLowerCase());
@@ -78,13 +79,23 @@ export function calculerObligations(c) {
   if (venteConsoEEE) preuve('email_confirmation_commande', 'confirmation sur support durable avec CGV et formulaire de rétractation — L221-13', /r[ée]tractation|withdraw/i, 'les informations sur la rétractation');
   if ((c.modele_economique?.types || []).includes('abonnement') && particuliers) preuve('resiliation_abonnement', 'abonnement — résiliation en ligne en quelques clics (France L215-1-1, Allemagne, Californie)', /r[ée]sili|cancel|k[üu]ndig/i, 'la résiliation en ligne');
   if (ios || android) preuve('licences_tierces', 'app distribuée — mentions de copyright des licences open source (MIT, BSD, Apache-2.0)', /licen[cs]e/i, 'la liste des licences');
+  if (forme === 'pwa') preuve('manifeste_app_web', 'app web installable sur l’écran d’accueil — regles/12-stores-applications.md', /start_url/, 'le manifeste de l’app web (start_url, icônes)');
   if (comptes || c.newsletter === true) preuve('mention_formulaire', 'formulaires qui collectent des données — RGPD art. 13 (modele mention-formulaire.md)', /confidentialit|privacy/i, 'la mention d’information avec le lien vers la politique');
 
   const controles = [];
   const ctrl = (niveau, cat, message) => controles.push({ niveau, cat, message });
   const sociales = connexions.filter((x) => CONNEXIONS_SOCIALES.includes(x));
   if (ios && sociales.length > 0 && !connexions.includes('apple')) {
-    ctrl('erreur', 'stores', `App iOS avec connexion ${sociales.join(', ')} : ajoute « apple » (Sign in with Apple) dans connexions — règle App Store 4.8.`);
+    ctrl('erreur', 'stores', `App iOS avec connexion ${sociales.join(', ')} : ajoute « apple » (Sign in with Apple) dans connexions. C'est la façon la plus sûre de respecter la règle App Store 4.8, qui exige une connexion équivalente : nom et e-mail seulement, e-mail masquable, aucun suivi publicitaire sans consentement.`);
+  }
+  if (['app', 'app+site'].includes(c.projet?.type) && !forme) {
+    ctrl('avertissement', 'stores', 'projet.forme_app non renseigné : demande à la personne si c’est une app web (pwa), le site affiché dans une app des stores (enveloppe) ou une vraie app (native). Les règles changent beaucoup (regles/12-stores-applications.md).');
+  }
+  if (forme === 'enveloppe' && ios) {
+    ctrl('avertissement', 'stores', 'Site affiché dans une app iOS : Apple refuse les apps qui ne sont qu’un site reconditionné (règle App Store 4.2). Ajoute de vraies fonctions d’app (regles/12-stores-applications.md, section 2).');
+  }
+  if (forme === 'enveloppe' && android) {
+    ctrl('avertissement', 'stores', 'Site affiché dans une app Android : Google Play exige d’être propriétaire du site affiché ou d’avoir l’autorisation de son propriétaire, et une app utile en elle-même (regles/12-stores-applications.md, section 2).');
   }
   if ((ios || android) && paiement && vendu.includes('numerique') && c.paiement?.achats_integres_app !== true && !c.paiement?.autre) {
     ctrl('avertissement', 'stores', 'Contenu numérique vendu dans une app : les achats intégrés Apple/Google sont en principe obligatoires (paiement.achats_integres_app). Justifie toute dérogation dans paiement.autre.');

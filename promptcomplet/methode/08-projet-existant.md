@@ -26,8 +26,11 @@
 ## Questionnaire en mode « audit »
 
 Déduis du code tout ce que tu peux : type, technologies, pays visés (langues, devises),
-fonctionnalités, comptes, paiements, données collectées, services externes. Ne pose que les
-questions auxquelles le code ne répond pas. Fais valider le résultat, puis crée `projet/config.json`.
+fonctionnalités, comptes, paiements, données collectées, services externes. Pose les questions
+auxquelles le code ne répond pas, et fais **toujours confirmer** la forme du projet avec les questions
+de `regles/12-stores-applications.md`, section 1 : site seul ou app, app web ou app des stores, iPhone
+et/ou Android, site simplement affiché dans une app ou vraie app. Fais valider le résultat, puis crée
+`projet/config.json`.
 
 ## Audit de sécurité et de conformité
 

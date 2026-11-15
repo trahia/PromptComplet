@@ -34,7 +34,22 @@ classée par gravité, avec pour chacun le fichier, la règle ou la loi concern�
 proposée. Il ne modifie, n'installe et ne commite **rien**. Vous décidez ensuite ensemble quoi corriger,
 point par point.
 
-**Avec Claude Code**, ouvert dans le dossier de ton projet, colle :
+> **Attention** : n'utilise pas le message d'installation (plus haut) sur un projet existant si tu
+> veux seulement savoir où tu en es. L'installation **ajoute des fichiers** à ton projet ; l'audit,
+> lui, ne touche à rien.
+
+**Avec Claude Code :**
+
+1. Ouvre une **nouvelle discussion** dans le dossier de ton projet, même si tu en as déjà une en
+   cours. Ton code est sur le disque : rien n'est perdu. Dans une discussion où Claude a lui-même écrit
+   le code, il a tendance à le juger avec indulgence, et l'audit risque de manquer de place.
+2. Choisis un mode où Claude **te demande la permission** avant d'agir (le mode par défaut), ou le
+   **mode Plan**, qui bloque les modifications. Évite les modes qui acceptent tout seuls (« Accept
+   edits », « Auto », « Bypass permissions ») : « sans rien modifier » est une consigne donnée à
+   Claude, pas un verrou. Dis oui seulement au téléchargement de la méthode dans le dossier
+   temporaire. Si le mode Plan bloque aussi ce téléchargement, repasse en mode par défaut juste pour
+   ça.
+3. Colle :
 
 > Fais un audit PromptComplet de ce projet **sans rien modifier**. Clone la méthode
 > https://github.com/trahia/PromptComplet dans un dossier temporaire **en dehors** de ce projet,
@@ -42,7 +57,10 @@ point par point.
 > des problèmes dans la discussion.
 
 **Avec claude.ai (navigateur)**, dans un projet Claude : ajoute aux connaissances du projet, via
-l'intégration GitHub, le dépôt PromptComplet **et** celui de ton projet, puis colle :
+l'intégration GitHub, le dépôt PromptComplet **et** celui de ton projet. Coller seulement le lien
+ne suffit pas : le dépôt est privé, Claude ne peut pas l'ouvrir par un lien (le compte GitHub connecté
+doit avoir accepté l'invitation). Ouvre ensuite une **nouvelle discussion** dans ce projet Claude, puis
+colle :
 
 > Suis le fichier `promptcomplet/methode/09-audit-seul.md` du dépôt PromptComplet pour auditer mon
 > projet, sans rien modifier. Donne-moi la liste des problèmes classée par gravité.

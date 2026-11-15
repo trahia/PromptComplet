@@ -97,17 +97,29 @@ les scans de sécurité (voir `catalogue/outils-securite.md`).
 
 ## 8. Stores (applications)
 
+Détail, dates et sources : `promptcomplet/regles/12-stores-applications.md`. Revérifie-la sur les pages
+officielles juste avant l'envoi.
+
+- [ ] **Forme de l'app reconfirmée** avec la personne (`projet.forme_app`). Pour un site affiché dans
+      une app (« enveloppe ») : de vraies fonctions d'app sont présentes (règle Apple 4.2, règles
+      WebView de Google Play).
+- [ ] **App web** (« pwa ») : manifeste, icônes, page hors ligne, service worker sans données
+      personnelles en cache, page d'aide à l'installation sur iPhone. Aucune section « store »
+      ci-dessous ne s'applique.
 - [ ] **Apple** :
   - fiche de confidentialité (« Privacy Nutrition Label ») remplie fidèlement ;
-  - classification d'âge ;
+  - questionnaire d'âge, avec les questions sur les fonctions de réseau social (obligatoires depuis
+    septembre 2026) ;
   - captures d'écran ;
   - Sign in with Apple si une connexion sociale est proposée ;
-  - suppression du compte dans l'app.
+  - suppression du compte dans l'app ;
+  - statut de professionnel (DSA) vérifié pour l'UE, coordonnées professionnelles.
 - [ ] **Google Play** :
   - formulaire « Sécurité des données » rempli fidèlement ;
-  - page web de suppression de compte ;
-  - période de test fermé si le compte est nouveau ;
-  - classification du contenu.
+  - suppression du compte dans l'app **et** page web de demande de suppression ;
+  - test fermé terminé si le compte personnel est nouveau (12 testeurs, 14 jours) ;
+  - classification du contenu ;
+  - statut de professionnel déclaré (EEE et Royaume-Uni), coordonnées professionnelles.
 - [ ] Règles de paiement des stores revérifiées (elles évoluent souvent).
 - [ ] URL de la politique de confidentialité renseignée dans les deux stores.
 - [ ] **Apple, technique** :

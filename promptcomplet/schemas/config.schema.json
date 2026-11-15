@@ -32,7 +32,8 @@
         "nom": { "type": ["string", "null"] },
         "type": { "enum": ["site", "app", "app+site", "entreprise", "autre"] },
         "precision_type": { "type": "string" },
-        "plateformes": { "type": "array", "items": { "enum": ["web", "ios", "android", "desktop"] } },
+        "plateformes": { "type": "array", "items": { "enum": ["web", "ios", "android", "desktop"] }, "description": "« ios » / « android » = publication dans l'App Store / Google Play." },
+        "forme_app": { "enum": ["aucune", "pwa", "enveloppe", "native"], "description": "Forme de l'application, confirmée par la personne : aucune (site seul), pwa (app web installée depuis le navigateur, icône sur l'écran d'accueil, hors stores), enveloppe (le site affiché dans une app des stores : Capacitor, Cordova, WebView, TWA), native (app native ou multiplateforme : Expo/React Native, Flutter, Swift, Kotlin). Voir regles/12-stores-applications.md." },
         "description": { "type": "string" },
         "public_cible": { "type": "string" }
       }

@@ -125,6 +125,11 @@ Avant d'écrire du code sur un sujet, **lis le fichier de règles correspondant*
 - Si le produit utilise de l'IA : transparence envers les utilisateurs, pas de données
   personnelles envoyées sans base légale, protection contre l'injection de prompt.
 
+### Applications et stores — `regles/12-stores-applications.md`
+- La forme du projet est **toujours confirmée** par la personne : site seul, app web (icône sur
+  l'écran d'accueil, hors stores), site affiché dans une app des stores, ou vraie app ; iPhone et/ou
+  Android. Elle décide des règles d'Apple et de Google à respecter et à revérifier pendant la veille.
+
 ## 5. Méthode de travail (toujours dans cet ordre)
 
 | Étape | Fichier | Résultat |

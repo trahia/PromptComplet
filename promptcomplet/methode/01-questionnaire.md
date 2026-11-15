@@ -53,16 +53,40 @@ Question à cocher (une seule réponse) :
 Si la personne choisit « Autre », la **précision est obligatoire**. Si elle est vague, reformule
 et redemande jusqu'à pouvoir la rattacher à un type de `promptcomplet/structures/`.
 
-## Q3 — Plateformes (seulement si une application est prévue)
+## Q3 — Forme de l'app et plateformes
 
-Question à cocher : **iPhone (iOS)**, **Android**, **Les deux**.
-Dans la description de chaque option, mentionne :
+Détail et raisons dans `promptcomplet/regles/12-stores-applications.md`. Note les réponses dans
+`projet.forme_app` et `projet.plateformes`.
+
+**Q3a — Comment les gens installeront l'app ?** Pose cette question si une application est prévue.
+Pour un « Site web », demande seulement : « Veux-tu que les gens puissent aussi l'installer comme une
+app, avec une icône sur l'écran d'accueil ? »
+
+Question à cocher :
+- **Depuis le site (app web)** : une icône sur l'écran d'accueil, sans passer par les stores. Pas de
+  validation par Apple ou Google, pas de frais de store, pas de commission sur les ventes. En
+  revanche, l'app est absente des stores et a moins de fonctions sur iPhone. → `forme_app` « pwa ».
+- **Depuis l'App Store et/ou Google Play** : visible dans les stores, mais toutes leurs règles
+  s'appliquent, avec des frais et une validation à chaque version. → `forme_app` « native ».
+- **Je ne sais pas** : explique les deux en une image simple, puis recommande selon le projet. Les
+  fonctions de l'appareil, la visibilité dans les stores ou les achats intégrés plaident pour les
+  stores. Un budget serré, des ventes sans commission ou un service surtout web plaident pour l'app
+  web.
+
+Si la personne veut **mettre son site tel quel dans une app des stores** (« enveloppe »), explique le
+risque de refus par Apple (règle 4.2) et les conditions de Google, prévus dans la section 2 de la
+règle 12. Propose une app web, ou une vraie app.
+
+**Q3b — Plateformes** (seulement pour une app des stores) : **iPhone (iOS)**, **Android**, **Les
+deux**. Dans la description de chaque option, mentionne :
 - iOS : compte Apple Developer obligatoire, environ 99 $/an. Pas besoin de Mac grâce aux
   compilations dans le cloud (Expo EAS).
 - Android : compte Google Play, environ 25 $ en une fois. Un nouveau compte personnel doit faire
-  tester l'app par un groupe de testeurs pendant une période minimale avant publication (conditions
-  à revérifier au lancement).
+  tester l'app par au moins 12 testeurs pendant 14 jours avant la publication (règle vérifiée le
+  2026-11-15, à revérifier au lancement).
 - Les deux : une seule base de code (Expo / React Native) pour les deux stores.
+- Dans les deux stores, le statut de **professionnel** et ses coordonnées s'affichent sur la fiche
+  de l'app dans l'UE : prévoir une adresse et un téléphone professionnels.
 
 ## Q4 — Pays et langues
 

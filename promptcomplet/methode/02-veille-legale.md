@@ -40,6 +40,13 @@ Pour **chaque pays** de `config.pays_cibles` et pour le pays d'établissement :
    `legifrance.gouv.fr`, `eur-lex.europa.eu`, `gov.il`, `gov.uk`, `admin.ch`, `canada.ca`, `ftc.gov`…).
    Une source non officielle peut servir de piste, jamais de preuve.
 
+**App publiée dans les stores** (« ios » ou « android » dans `projet.plateformes`) : vérifie aussi
+les règles d'Apple et de Google sur les pages officielles listées dans
+`promptcomplet/regles/12-stores-applications.md`, section 6. Elles changent plus souvent que les lois
+(niveau d'API cible, questionnaire d'âge, statut de professionnel, achats intégrés), et ne pas les
+respecter fait refuser ou retirer l'app. Une **app web** (`forme_app` « pwa ») n'est soumise qu'aux
+lois du web.
+
 ## Ce que tu écris
 
 ### `projet/veille-legale.md` (créé ou complété à chaque vérification)
@@ -54,6 +61,10 @@ Pour **chaque pays** de `config.pays_cibles` et pour le pays d'établissement :
 - Obligations applicables au projet :
   | Obligation | Pourquoi elle s'applique | Ce que ça change dans le produit | Statut |
 - Points incertains, à faire valider par un professionnel : …
+### Stores (seulement pour une app publiée dans l'App Store ou Google Play)
+- Pages consultées : <URL officielle> (consultée le <date>), …
+- Changements depuis `regles/12-stores-applications.md` (vérifiée le <date>) : <aucun / liste>
+- Ce que ça change dans l'app, et avant quelle date : …
 ```
 
 ### Mises à jour associées
