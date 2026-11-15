@@ -1,4 +1,4 @@
-# PromptComplet — configuration Gitleaks : règles par défaut + exceptions documentées.
+# ZeroTrap — configuration Gitleaks : règles par défaut + exceptions documentées.
 # Fichier PROTÉGÉ : l'IA ne peut pas y ajouter d'exception (cela pourrait masquer un vrai secret).
 # Toute exception est ajoutée à la main par la personne, avec une justification.
 
@@ -7,4 +7,4 @@ useDefault = true
 
 [allowlist]
 description = "Empreintes de fichiers, qui ne sont pas des secrets : méthode (SHA-256) et liste des composants SBOM générée depuis le lockfile."
-paths = ['''promptcomplet/integrite\.json''', '''projet/sbom\.cdx\.json''']
+paths = ['''zerotrap/integrite\.json''', '''projet/sbom\.cdx\.json''']

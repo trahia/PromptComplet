@@ -1,0 +1,93 @@
+/* ZeroTrap — bandeau cookies. Les trois boutons ont volontairement le MÊME style (CNIL).
+   Adapte les couleurs aux design tokens du projet, sans jamais mettre « Tout accepter » plus en avant. */
+
+.cc-banner {
+  position: fixed;
+  inset-inline: 1rem;
+  inset-block-end: 1rem;
+  z-index: 9998;
+  max-width: 40rem;
+  margin-inline: auto;
+  padding: 1rem 1.25rem;
+  border: 1px solid #6b6b6b;
+  border-radius: 0.75rem;
+  background: #fff;
+  color: #111;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.2);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.cc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.cc-header h2 {
+  margin: 0;
+  font-size: 1.125rem;
+}
+.cc-banner a {
+  color: #1c4ed8;
+  text-decoration: underline;
+}
+.cc-categories {
+  margin: 0.5rem 0;
+  padding: 0;
+  list-style: none;
+}
+.cc-categories label {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  padding: 0.25rem 0;
+}
+.cc-categories input {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.15rem;
+}
+.cc-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+.cc-button {
+  flex: 1 1 10rem;
+  min-height: 2.75rem;
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--cc-accent, #1c4ed8);
+  border-radius: 0.5rem;
+  background: var(--cc-accent, #1c4ed8);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.cc-close {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  border: 1px solid #6b6b6b;
+  border-radius: 0.5rem;
+  background: transparent;
+  color: inherit;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.cc-button:focus-visible,
+.cc-close:focus-visible,
+.cc-banner a:focus-visible {
+  outline: 3px solid #f5b400;
+  outline-offset: 2px;
+}
+.cc-gate {
+  display: grid;
+  gap: 0.5rem;
+  place-items: center;
+  padding: 1.5rem;
+  border: 1px dashed #6b6b6b;
+  border-radius: 0.75rem;
+  text-align: center;
+}

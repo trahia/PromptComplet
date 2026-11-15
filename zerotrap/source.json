@@ -1,0 +1,7 @@
+{
+  "nom": "ZeroTrap",
+  "depot_modele": "https://github.com/trahia/ZeroTrap",
+  "note": "Adresse du dépôt modèle. Les verrous empêchent d'y envoyer le projet d'un utilisateur.",
+  "ancien_depot": "https://github.com/trahia/PromptComplet",
+  "note_ancien_nom": "ZeroTrap s'appelait PromptComplet jusqu'à la version 1.3.0. GitHub redirige l'ancienne adresse : elle est donc aussi traitée comme le dépôt modèle."
+}

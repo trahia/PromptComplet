@@ -1,12 +1,12 @@
 # Dossier `projet/`
 
-Ce dossier est **vide dans le modèle PromptComplet**. Dans le projet de chaque personne, l'IA y crée et
+Ce dossier est **vide dans le modèle ZeroTrap**. Dans le projet de chaque personne, l'IA y crée et
 tient à jour :
 
 | Fichier | Rôle |
 |---|---|
 | `brief.md` | Les réponses au questionnaire, lisibles par un humain |
-| `config.json` | La description machine du projet (format : `promptcomplet/schemas/config.schema.json`) |
+| `config.json` | La description machine du projet (format : `zerotrap/schemas/config.schema.json`) |
 | `veille-legale.md` | Les vérifications des lois sur les sources officielles, datées et sourcées |
 | `plan.md` | Le plan concret validé par la personne |
 | `journal.md` | Ce qui a été fait et décidé, étape par étape |

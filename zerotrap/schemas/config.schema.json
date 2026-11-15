@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "zerotrap/config.schema.json",
+  "title": "ZeroTrap — projet/config.json",
+  "description": "Description machine du projet, lue par les verrous et le script de conformité. Remplie par l'IA à la fin du questionnaire, puis tenue à jour.",
+  "type": "object",
+  "required": ["version_methode", "statut", "porteur", "etablissement", "projet", "pays_cibles", "langues", "comptes_utilisateurs", "paiement"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "version_methode": { "type": "string", "description": "Version de ZeroTrap (zerotrap/VERSION)." },
+    "statut": { "enum": ["questionnaire", "plan", "construction", "lancement", "production"] },
+    "porteur": {
+      "type": "object",
+      "required": ["prenom"],
+      "properties": {
+        "prenom": { "type": "string" },
+        "langue": { "type": "string", "description": "Langue de la personne (ISO 639-1)." }
+      }
+    },
+    "etablissement": {
+      "type": "object",
+      "required": ["pays"],
+      "properties": {
+        "pays": { "type": "string", "pattern": "^[A-Z]{2}$" },
+        "statut_juridique": { "type": "string", "description": "particulier, micro-entreprise, societe, association, a-definir…" }
+      }
+    },
+    "projet": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "nom": { "type": ["string", "null"] },
+        "type": { "enum": ["site", "app", "app+site", "entreprise", "autre"] },
+        "precision_type": { "type": "string" },
+        "plateformes": { "type": "array", "items": { "enum": ["web", "ios", "android", "desktop"] }, "description": "« ios » / « android » = publication dans l'App Store / Google Play." },
+        "forme_app": { "enum": ["aucune", "pwa", "enveloppe", "native"], "description": "Forme de l'application, confirmée par la personne : aucune (site seul), pwa (app web installée depuis le navigateur, icône sur l'écran d'accueil, hors stores), enveloppe (le site affiché dans une app des stores : Capacitor, Cordova, WebView, TWA), native (app native ou multiplateforme : Expo/React Native, Flutter, Swift, Kotlin). Voir regles/12-stores-applications.md." },
+        "description": { "type": "string" },
+        "public_cible": { "type": "string" }
+      }
+    },
+    "pays_cibles": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^[A-Z]{2}$" } },
+    "langues": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^[a-z]{2,3}(-[A-Z]{2})?$" } },
+    "clientele": { "enum": ["particuliers", "professionnels", "les-deux"], "default": "particuliers" },
+    "modele_economique": {
+      "type": "object",
+      "properties": {
+        "types": { "type": "array", "items": { "enum": ["gratuit", "publicite", "freemium", "achat-unique", "abonnement", "commission", "paiement-a-l-acte", "dons", "autre"] } },
+        "ce_qui_est_vendu": { "type": "array", "items": { "enum": ["numerique", "physique", "service"] } },
+        "detail": { "type": "string" }
+      }
+    },
+    "fonctionnalites": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["nom", "statut"],
+        "properties": {
+          "nom": { "type": "string" },
+          "statut": { "enum": ["validee", "plus-tard", "refusee"] },
+          "phase": { "type": "integer", "minimum": 1 }
+        }
+      }
+    },
+    "comptes_utilisateurs": { "enum": ["oui", "non", "optionnel"] },
+    "connexions": { "type": "array", "items": { "enum": ["email-mot-de-passe", "lien-magique", "passkey", "sms", "google", "apple", "github", "microsoft", "facebook", "linkedin", "x", "autre"] } },
+    "paiement": {
+      "type": "object",
+      "required": ["actif"],
+      "properties": {
+        "actif": { "type": "boolean" },
+        "prestataires": { "type": "array", "items": { "type": "string" } },
+        "achats_integres_app": { "type": "boolean" },
+        "autre": { "type": "string" }
+      }
+    },
+    "publicite": { "type": "boolean" },
+    "newsletter": { "type": "boolean" },
+    "mesure_audience": { "enum": ["aucune", "sans-cookies", "avec-consentement"] },
+    "cookies_non_essentiels": { "type": "boolean" },
+    "public_mineurs": { "enum": ["non", "possible", "oui"] },
+    "contenu_utilisateurs": { "type": "boolean" },
+    "place_de_marche": { "type": "boolean" },
+    "ia_dans_le_produit": { "type": "boolean" },
+    "televersement_fichiers": { "type": "boolean", "description": "Les utilisateurs peuvent envoyer des fichiers (photos, documents…). Règle 01, section 4." },
+    "logiciel_saas": { "type": "boolean", "description": "Logiciel en ligne que des clients utilisent pour gérer leurs propres données (Data Act, chapitre VI)." },
+    "objets_connectes": { "type": "boolean", "description": "Objet connecté ou service lié à un objet (Data Act, chapitre II)." },
+    "influenceurs": { "type": "boolean", "description": "Promotion par des influenceurs ou créateurs de contenu (loi française 2023-451)." },
+    "avis_clients": { "type": "boolean", "description": "Le service affiche des avis ou des notes d'utilisateurs (Code conso L111-7-2)." },
+    "cookies": {
+      "type": "array",
+      "description": "Chaque cookie ou traceur réellement déposé (vérifié dans le navigateur). Chaque nom et chaque fournisseur doit apparaître dans la page cookies.",
+      "items": {
+        "type": "object",
+        "required": ["nom", "fournisseur", "finalite", "duree", "categorie"],
+        "properties": {
+          "nom": { "type": "string" },
+          "fournisseur": { "type": "string" },
+          "finalite": { "type": "string" },
+          "duree": { "type": "string" },
+          "categorie": { "enum": ["necessaire", "mesure", "publicite", "contenus-tiers", "preferences"] }
+        }
+      }
+    },
+    "donnees_sensibles": { "type": "array", "items": { "enum": ["sante", "biometrie", "genetique", "origine", "opinions", "religion", "syndicat", "orientation", "infractions", "localisation-precise", "piece-identite", "financier"] } },
+    "donnees": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["nom", "finalite", "base_legale", "conservation"],
+        "properties": {
+          "nom": { "type": "string", "description": "Nom tel qu'il apparaît dans la politique de confidentialité." },
+          "finalite": { "type": "string" },
+          "base_legale": { "enum": ["consentement", "contrat", "obligation-legale", "interet-legitime", "interet-vital", "mission-publique"] },
+          "conservation": { "type": "string" },
+          "obligatoire": { "type": "boolean" },
+          "sensible": { "type": "boolean" },
+          "stockage": { "type": "string" }
+        }
+      }
+    },
+    "sous_traitants": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["nom"],
+        "properties": {
+          "nom": { "type": "string" },
+          "role": { "type": "string" },
+          "localisation": { "type": "string" },
+          "garanties": { "type": "string" }
+        }
+      }
+    },
+    "preuves": {
+      "type": "object",
+      "description": "Chemin (ou liste de chemins) du fichier qui implémente chaque fonctionnalité obligatoire.",
+      "additionalProperties": { "oneOf": [{ "type": "string" }, { "type": "array", "items": { "type": "string" } }] }
+    },
+    "veille_legale": {
+      "type": "object",
+      "properties": {
+        "derniere_verification": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+        "pays_verifies": { "type": "array", "items": { "type": "string", "pattern": "^[A-Z]{2}$" } }
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-# PromptComplet — vérification de conformité (légal, données, accessibilité, intégrité de la méthode).
+# ZeroTrap — vérification de conformité (légal, données, accessibilité, intégrité de la méthode).
 # Fichier PROTÉGÉ : l'IA ne le modifie pas. Sur un tag (version publiée) : mode lancement strict.
 name: Conformité
 
@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   conformite:
-    name: Conformité PromptComplet
+    name: Conformité ZeroTrap
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -30,4 +30,4 @@ jobs:
         env:
           # Sur un tag (version publiée) : mode lancement strict. Passé par variable (pas d'injection dans le shell).
           MODE: ${{ startsWith(github.ref, 'refs/tags/') && '--release' || '' }}
-        run: node promptcomplet/scripts/verifier-conformite.mjs --ci $MODE
+        run: node zerotrap/scripts/verifier-conformite.mjs --ci $MODE

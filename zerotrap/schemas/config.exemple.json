@@ -1,0 +1,57 @@
+{
+  "$schema": "../zerotrap/schemas/config.schema.json",
+  "version_methode": "2.0.0",
+  "statut": "construction",
+  "porteur": { "prenom": "Alex", "langue": "fr" },
+  "etablissement": { "pays": "FR", "statut_juridique": "micro-entreprise" },
+  "projet": {
+    "nom": "Exemple",
+    "type": "app+site",
+    "plateformes": ["web", "ios", "android"],
+    "forme_app": "native",
+    "description": "Exemple fictif utilisé pour illustrer le format.",
+    "public_cible": "Adultes en France et en Belgique"
+  },
+  "pays_cibles": ["FR", "BE"],
+  "langues": ["fr"],
+  "clientele": "particuliers",
+  "modele_economique": { "types": ["freemium"], "ce_qui_est_vendu": ["numerique"], "detail": "Abonnement premium mensuel" },
+  "fonctionnalites": [
+    { "nom": "Recherche avec filtres", "statut": "validee", "phase": 1 },
+    { "nom": "Favoris", "statut": "validee", "phase": 1 },
+    { "nom": "Messagerie", "statut": "plus-tard" }
+  ],
+  "comptes_utilisateurs": "oui",
+  "connexions": ["email-mot-de-passe", "passkey", "google", "apple"],
+  "paiement": { "actif": true, "prestataires": ["stripe", "revenuecat"], "achats_integres_app": true },
+  "publicite": false,
+  "newsletter": false,
+  "mesure_audience": "sans-cookies",
+  "cookies_non_essentiels": false,
+  "public_mineurs": "non",
+  "contenu_utilisateurs": false,
+  "place_de_marche": false,
+  "ia_dans_le_produit": false,
+  "televersement_fichiers": false,
+  "logiciel_saas": false,
+  "objets_connectes": false,
+  "influenceurs": false,
+  "donnees_sensibles": [],
+  "donnees": [
+    { "nom": "adresse e-mail", "finalite": "création et gestion du compte", "base_legale": "contrat", "conservation": "durée du compte", "obligatoire": true },
+    { "nom": "historique d'achats", "finalite": "facturation", "base_legale": "obligation-legale", "conservation": "10 ans (obligation comptable)", "obligatoire": true }
+  ],
+  "sous_traitants": [
+    { "nom": "Supabase", "role": "base de données et authentification", "localisation": "UE (Francfort)", "garanties": "DPA" },
+    { "nom": "Stripe", "role": "paiement sur le web", "localisation": "UE / États-Unis", "garanties": "DPA, Data Privacy Framework" }
+  ],
+  "preuves": {
+    "composant_accessibilite": ["apps/web/src/app/layout.tsx", "apps/mobile/app/_layout.tsx"],
+    "liens_legaux": "apps/web/src/components/legal/LegalLinks.tsx",
+    "suppression_compte": "apps/mobile/app/settings/privacy.tsx",
+    "export_donnees": "apps/mobile/app/settings/privacy.tsx",
+    "page_web_suppression_compte": "apps/web/src/app/compte/supprimer/page.tsx",
+    "retractation_en_ligne": "apps/web/src/app/compte/commandes/retractation/page.tsx"
+  },
+  "veille_legale": { "derniere_verification": "2026-11-11", "pays_verifies": ["FR", "BE"] }
+}

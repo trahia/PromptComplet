@@ -1,4 +1,4 @@
-# PromptComplet — scan dynamique OWASP ZAP (baseline, non intrusif) d'une URL de PRÉPRODUCTION.
+# ZeroTrap — scan dynamique OWASP ZAP (baseline, non intrusif) d'une URL de PRÉPRODUCTION.
 # Lancement manuel uniquement (onglet Actions > Scan dynamique > Run workflow).
 # Ne jamais scanner un site qui n'appartient pas à la personne. Fichier PROTÉGÉ.
 name: Scan dynamique (ZAP)

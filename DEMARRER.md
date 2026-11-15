@@ -1,4 +1,4 @@
-# Démarrer un projet avec PromptComplet
+# Démarrer un projet avec ZeroTrap
 
 ## Ce qu'il te faut
 
@@ -15,9 +15,9 @@
 2. Ouvre Claude Code **dans ce dossier**.
 3. Copie-colle ce message :
 
-   > Installe la méthode PromptComplet depuis https://github.com/trahia/PromptComplet dans
-   > ce dossier. Clone-la dans un sous-dossier temporaire `.promptcomplet-source`, puis suis
-   > exactement le fichier `promptcomplet/methode/00-installation.md` de ce clone.
+   > Installe la méthode ZeroTrap depuis https://github.com/trahia/ZeroTrap dans
+   > ce dossier. Clone-la dans un sous-dossier temporaire `.zerotrap-source`, puis suis
+   > exactement le fichier `zerotrap/methode/00-installation.md` de ce clone.
 
 4. Quand Claude te le demande, **ferme puis relance Claude Code dans le même dossier**. Cela active
    les protections automatiques. Si Claude Code te demande de faire confiance au dossier, accepte :
@@ -49,17 +49,17 @@ point par point.
    ça.
 3. Colle :
 
-> Fais un audit PromptComplet de ce projet **sans rien modifier**. Clone la méthode
-> https://github.com/trahia/PromptComplet dans un dossier temporaire **en dehors** de ce projet,
-> puis suis exactement `promptcomplet/methode/09-audit-seul.md` de ce clone. Donne-moi la liste
+> Fais un audit ZeroTrap de ce projet **sans rien modifier**. Clone la méthode
+> https://github.com/trahia/ZeroTrap dans un dossier temporaire **en dehors** de ce projet,
+> puis suis exactement `zerotrap/methode/09-audit-seul.md` de ce clone. Donne-moi la liste
 > des problèmes dans la discussion.
 
 **Avec claude.ai (navigateur)**, dans un projet Claude : ajoute aux connaissances du projet, via
-l'intégration GitHub, le dépôt PromptComplet **et** celui de ton projet. Il faut pour cela un compte
+l'intégration GitHub, le dépôt ZeroTrap **et** celui de ton projet. Il faut pour cela un compte
 GitHub. Coller seulement le lien ne suffit pas : par un lien, Claude ne peut pas lire tout un dépôt.
 Ouvre ensuite une **nouvelle discussion** dans ce projet Claude, puis colle :
 
-> Suis le fichier `promptcomplet/methode/09-audit-seul.md` du dépôt PromptComplet pour auditer mon
+> Suis le fichier `zerotrap/methode/09-audit-seul.md` du dépôt ZeroTrap pour auditer mon
 > projet, sans rien modifier. Donne-moi la liste des problèmes classée par gravité.
 
 Sur claude.ai, Claude ne peut de toute façon rien modifier dans ton code. En revanche, il ne peut ni
@@ -87,6 +87,6 @@ corrections, Claude Code est plus adapté.
 
 ## Confidentialité
 
-Ton projet reste dans ton dossier. Le lien avec le dépôt PromptComplet est coupé pendant
+Ton projet reste dans ton dossier. Le lien avec le dépôt ZeroTrap est coupé pendant
 l'installation, et un verrou empêche d'y envoyer ton travail. Pour sauvegarder ton projet en
 ligne, Claude t'aidera à créer **ton propre** dépôt GitHub privé.

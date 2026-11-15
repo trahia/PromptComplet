@@ -1,9 +1,9 @@
 #!/bin/sh
-# PromptComplet — contrôle avant chaque commit.
+# ZeroTrap — contrôle avant chaque commit.
 # Ne jamais le contourner (--no-verify) : corriger le problème signalé.
 
-node promptcomplet/scripts/scanner-secrets.mjs --staged || exit 1
-node promptcomplet/scripts/verifier-conformite.mjs --pre-commit || exit 1
+node zerotrap/scripts/scanner-secrets.mjs --staged || exit 1
+node zerotrap/scripts/verifier-conformite.mjs --pre-commit || exit 1
 
 # Gitleaks, s'il est installé sur la machine (recommandé).
 if command -v gitleaks >/dev/null 2>&1; then

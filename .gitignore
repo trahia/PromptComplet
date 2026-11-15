@@ -14,8 +14,8 @@ credentials.json
 service-account*.json
 secrets/
 
-# --- Mode mainteneur PromptComplet (créé à la main, jamais par l'IA) ---
-.promptcomplet-mainteneur
+# --- Mode mainteneur ZeroTrap (créé à la main, jamais par l'IA) ---
+.zerotrap-mainteneur
 
 # --- Dépendances et builds ---
 node_modules/

@@ -1,10 +1,10 @@
 #!/usr/bin/env node
-// PromptComplet — verrou des commandes (hook PreToolUse : Bash, PowerShell).
+// ZeroTrap — verrou des commandes (hook PreToolUse : Bash, PowerShell).
 // Bloque : lecture de secrets, contournement des contrôles, modification de la méthode, scripts
 // téléchargés exécutés directement, push vers le dépôt modèle, commandes destructrices.
 // En cas de panne du verrou, la commande est BLOQUÉE par sécurité.
 
-const lib = (f) => new URL(`../../promptcomplet/scripts/lib/${f}`, import.meta.url).href;
+const lib = (f) => new URL(`../../zerotrap/scripts/lib/${f}`, import.meta.url).href;
 
 try {
   const { lireEntree, bloquer, autoriser } = await import(lib('hook-io.mjs'));
@@ -20,7 +20,7 @@ try {
   if (motif) bloquer(motif);
   autoriser();
 } catch (e) {
-  process.stderr.write(`⛔ PromptComplet — le verrou des commandes est indisponible (${e?.message || e}).
-Par sécurité, la commande est bloquée. Vérifie que le dossier promptcomplet/ est complet.\n`);
+  process.stderr.write(`⛔ ZeroTrap — le verrou des commandes est indisponible (${e?.message || e}).
+Par sécurité, la commande est bloquée. Vérifie que le dossier zerotrap/ est complet.\n`);
   process.exit(2);
 }
