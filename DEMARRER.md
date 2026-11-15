@@ -3,13 +3,11 @@
 ## Ce qu'il te faut
 
 1. **Claude Code** : l'application de bureau Claude (onglet Code) ou Claude Code dans un terminal.
-2. **L'accès à ce dépôt** : accepte l'invitation GitHub reçue par e-mail.
-3. **Ta connexion GitHub sur ton ordinateur**, pour que Claude puisse télécharger la méthode :
-   - installe GitHub CLI (Windows : `winget install --id GitHub.cli` ; Mac : `brew install gh`) ;
-   - **ferme puis rouvre ton terminal**, puis tape `gh auth login`, et choisis **GitHub.com**,
-     **HTTPS**, **Yes**, **Login with a web browser**.
-4. **Git** et **Node.js 22 ou plus** (version 24 LTS recommandée). Si tu ne les as pas, Claude te
+   Il faut un abonnement Claude qui inclut Claude Code, par exemple Pro ou Max.
+2. **Git** et **Node.js 22 ou plus** (version 24 LTS recommandée). Si tu ne les as pas, Claude te
    dira comment les installer.
+
+**Pas besoin de compte GitHub** : la méthode est publique, Claude la télécharge tout seul.
 
 ## Les étapes
 
@@ -57,10 +55,9 @@ point par point.
 > des problèmes dans la discussion.
 
 **Avec claude.ai (navigateur)**, dans un projet Claude : ajoute aux connaissances du projet, via
-l'intégration GitHub, le dépôt PromptComplet **et** celui de ton projet. Coller seulement le lien
-ne suffit pas : le dépôt est privé, Claude ne peut pas l'ouvrir par un lien (le compte GitHub connecté
-doit avoir accepté l'invitation). Ouvre ensuite une **nouvelle discussion** dans ce projet Claude, puis
-colle :
+l'intégration GitHub, le dépôt PromptComplet **et** celui de ton projet. Il faut pour cela un compte
+GitHub. Coller seulement le lien ne suffit pas : par un lien, Claude ne peut pas lire tout un dépôt.
+Ouvre ensuite une **nouvelle discussion** dans ce projet Claude, puis colle :
 
 > Suis le fichier `promptcomplet/methode/09-audit-seul.md` du dépôt PromptComplet pour auditer mon
 > projet, sans rien modifier. Donne-moi la liste des problèmes classée par gravité.

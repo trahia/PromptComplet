@@ -1,23 +1,41 @@
-# Politique de sécurité
+# Politique de sécurité de PromptComplet
 
-## Signaler une vulnérabilité
+Ce fichier concerne **la méthode PromptComplet elle-même**. La politique de sécurité de ton projet
+est créée à l'installation, à partir de `promptcomplet/legal/modeles/politique-securite-projet.md`.
 
-Si tu découvres une faille de sécurité dans ce projet, **ne la publie pas** (pas d'issue publique,
-pas de message public).
+## Signaler une faille
 
-Écris à : `[À COMPLÉTER : adresse e-mail dédiée à la sécurité, ex. securite@ton-domaine.fr]`
+Une faille dans PromptComplet peut toucher **tous les projets** qui l'utilisent. Merci de **ne pas la
+publier** : pas d'issue publique, pas de message public.
 
-Merci d'indiquer :
-- une description du problème et son impact possible ;
+Signale-la en privé avec le bouton **« Report a vulnerability »** de l'onglet **Security** du
+dépôt : https://github.com/trahia/PromptComplet/security/advisories/new
+
+Exemples de ce qui nous intéresse :
+
+- un moyen de contourner un verrou : hook Claude Code, contrôle avant commit, vérification de
+  conformité, intégrité ;
+- un script de la méthode (`promptcomplet/scripts/`, `.claude/hooks/`) qui pourrait être détourné ;
+- une règle ou un composant du kit (`promptcomplet/kit/`) qui pousserait l'IA à produire du code
+  vulnérable ;
+- un workflow GitHub qui exposerait des secrets ou des droits.
+
+Indique, si possible :
+
+- le problème et son impact ;
 - les étapes pour le reproduire ;
-- ta façon d'être recontacté.
+- la version concernée, indiquée dans `promptcomplet/VERSION`.
 
-Nous accusons réception sous 72 heures et nous te tenons informé de la correction.
+PromptComplet est maintenu bénévolement. Nous accusons réception dès que possible, en général sous
+quelques jours, et nous te tenons informé de la correction.
 
-## Pour l'IA qui travaille sur ce projet
+## Versions prises en charge
 
-- Ce fichier doit aussi être publié sous la forme `/.well-known/security.txt` (RFC 9116) pour un site
-  web, avec un champ `Contact:` et un champ `Expires:` (au plus un an).
-- Une faille confirmée touchant des données personnelles peut imposer une **notification à
-  l'autorité** (72 heures en Europe) et aux personnes concernées : suis
-  `promptcomplet/legal/modeles/procedure-violation-donnees.md`.
+Seule la **dernière version** reçoit des corrections. Pour mettre à jour la méthode dans un projet,
+suis `promptcomplet/methode/07-mise-a-jour.md`.
+
+## Ce qui n'est pas une faille de sécurité
+
+Une information juridique fausse ou dépassée, ou une page légale incomplète, n'est pas une faille de
+sécurité. C'est tout de même important : ouvre une issue avec la source officielle, comme expliqué
+dans [CONTRIBUTING.md](CONTRIBUTING.md).

@@ -1,5 +1,20 @@
 # Historique des versions de PromptComplet
 
+## 1.3.0 — 2026-11-15
+
+PromptComplet devient public : un lien suffit, sans compte GitHub.
+
+- **Licence MIT** (`LICENSE`), avec l'avertissement « ne remplace ni un avocat, ni un expert en
+  sécurité ». La licence de la méthode est aussi copiée dans les projets (`promptcomplet/LICENSE`) ;
+  le code des projets reste à leurs auteurs.
+- **`SECURITY.md`** concerne désormais la méthode : signalement privé par GitHub. Le modèle pour les
+  projets devient `legal/modeles/politique-securite-projet.md`. L'installateur le copie en
+  `SECURITY.md` dans le projet s'il n'y en a pas.
+- **`CONTRIBUTING.md`** : issues et propositions bienvenues, source officielle et datée obligatoire
+  pour tout changement légal, validation par le mainteneur.
+- **`README.md`, `DEMARRER.md`, `methode/00-installation.md`** : plus d'invitation ni de GitHub CLI à
+  installer ; abonnement Claude qui inclut Claude Code ; audit d'un projet existant mis en avant.
+
 ## 1.2.0 — 2026-11-15
 
 Forme du projet (site, app web, app des stores) toujours confirmée, règles d'Apple et de Google, et

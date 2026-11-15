@@ -28,7 +28,8 @@ const confirmeHistorique = valeur('--confirme-suppression-historique') === true;
 const sourceArg = valeur('--source');
 const source = surPlace ? cible : path.resolve(typeof sourceArg === 'string' ? sourceArg : path.resolve(ICI, '..', '..'));
 
-const SEULEMENT_MODELE = new Set(['README.md', 'DEMARRER.md', 'LICENSE']);
+const SEULEMENT_MODELE = new Set(['README.md', 'DEMARRER.md', 'LICENSE', 'SECURITY.md', 'CONTRIBUTING.md']);
+const MODELE_SECURITE = 'promptcomplet/legal/modeles/politique-securite-projet.md';
 const EXCLUS_RACINE = new Set(['.git', 'node_modules', '.promptcomplet-source', '.promptcomplet-mainteneur', ...SEULEMENT_MODELE]);
 const EXCLUS = new Set(['promptcomplet/.installe', '.claude/settings.local.json']);
 const SKILLS = ['demarrer', 'verifier', 'nouvelle-fonctionnalite', 'veille-legale', 'lancement'];
@@ -198,6 +199,12 @@ async function installer() {
       for (const c of conflits) note(`- ${c}`);
       note('Voir promptcomplet/methode/08-projet-existant.md pour les fusionner avec l’accord de la personne.');
     }
+  }
+
+  const securite = path.join(cible, 'SECURITY.md');
+  if (!fs.existsSync(securite) && fs.existsSync(path.join(cible, MODELE_SECURITE))) {
+    fs.copyFileSync(path.join(cible, MODELE_SECURITE), securite);
+    ok('SECURITY.md (politique de sécurité de ton projet, à compléter) créé.');
   }
 
   configurerGit();

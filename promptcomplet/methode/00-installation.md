@@ -13,7 +13,6 @@ Lance ces vérifications et explique simplement ce qui manque :
 |---|---|---|
 | Git | `git --version` | Windows : `winget install --id Git.Git` · Mac : `xcode-select --install` |
 | Node.js 22.20+ (24 LTS recommandé) | `node --version` | Windows : `winget install OpenJS.NodeJS.LTS` · Mac : `brew install node`. Les scripts de PromptComplet fonctionnent dès Node 18, mais l'outil d'installation des skills demande Node 22.20 ou plus. |
-| GitHub CLI (pour un dépôt privé) | `gh auth status` | voir `DEMARRER.md` ; la connexion est faite **par la personne** |
 
 Après une installation, la personne doit **fermer et rouvrir son terminal** pour que la commande
 soit reconnue. Ne tente jamais de te connecter à la place de la personne et ne lui demande jamais
@@ -42,7 +41,10 @@ node promptcomplet/scripts/installer.mjs --sur-place
 
 Le script :
 1. copie la méthode (sans l'historique git du modèle) et n'écrase rien ;
-2. retire les fichiers propres au dépôt modèle (`README.md` et `DEMARRER.md` de présentation, `LICENSE`) ;
+2. retire les fichiers propres au dépôt modèle (`README.md` et `DEMARRER.md` de présentation, `LICENSE`,
+   `SECURITY.md` et `CONTRIBUTING.md` du modèle), puis crée le `SECURITY.md` du projet à partir de
+   `promptcomplet/legal/modeles/politique-securite-projet.md`. La licence de la méthode reste dans
+   `promptcomplet/LICENSE` ;
 3. crée un dépôt git neuf (`git init -b main`) si besoin, sans aucun lien vers le modèle ;
 4. active le contrôle avant commit (`git config core.hooksPath .githooks`) ;
 5. crée `projet/journal.md` et le marqueur `promptcomplet/.installe` ;
@@ -70,6 +72,6 @@ contourne pas le problème à la main.
 
 | Problème | Explication à donner | Solution |
 |---|---|---|
-| `Repository not found` au clonage | L'accès au dépôt privé n'est pas encore actif | Accepter l'invitation GitHub, puis `gh auth login` et `gh auth setup-git` |
-| `gh` ou `node` « n'est pas reconnu » | Le terminal a été ouvert avant l'installation | Fermer et rouvrir le terminal |
+| `Repository not found` ou échec du clonage | L'adresse est mal recopiée, ou internet est coupé | Vérifier l'adresse `https://github.com/trahia/PromptComplet` et la connexion, puis réessayer |
+| `git` ou `node` « n'est pas reconnu » | Le terminal a été ouvert avant l'installation | Fermer et rouvrir le terminal |
 | Le dossier contient déjà un projet | La méthode peut s'ajouter à un projet existant | Suivre `promptcomplet/methode/08-projet-existant.md` |

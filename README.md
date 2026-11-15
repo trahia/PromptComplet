@@ -7,13 +7,14 @@ concret, puis réalise le projet en respectant des règles strictes. Ces règles
 applique, pas toi : sécurité, données personnelles, lois de chaque pays, accessibilité, copyright,
 qualité du design.
 
-> Dépôt privé. Accès sur invitation uniquement. Voir [LICENSE](LICENSE).
+> Gratuit et open source ([licence MIT](LICENSE)). PromptComplet **ne remplace ni un avocat, ni un
+> expert en sécurité** : lis « [Ce que PromptComplet n'est pas](#ce-que-promptcomplet-nest-pas) ».
 
 ---
 
 ## Ce que PromptComplet fait pour toi
 
-- **Un questionnaire guidé** : nom, type de projet (app, site, les deux, entreprise…), iOS/Android,
+- **Un questionnaire guidé** : nom, type de projet (site, app web, app des stores, entreprise…), iOS/Android,
   pays, description, modèle économique, comptes utilisateurs (avec le prix de chaque mode de
   connexion), paiements adaptés à ton pays.
 - **Des idées auxquelles tu n'aurais pas pensé** : Claude pousse ton idée (catégories, filtres,
@@ -32,8 +33,12 @@ qualité du design.
 
 ## Démarrer
 
-Suis le guide [DEMARRER.md](DEMARRER.md). Compte 5 minutes d'installation, puis 10 à 15 minutes de
-questions.
+Suis le guide [DEMARRER.md](DEMARRER.md). Pas besoin de compte GitHub. Compte 5 minutes
+d'installation, puis 10 à 15 minutes de questions.
+
+**Tu as déjà un projet ?** Commence par un **audit sans rien modifier** : Claude lit ton code et te
+donne la liste des problèmes (sécurité, lois, pages obligatoires, accessibilité, règles d'Apple et de
+Google), classée par gravité. Le message à copier est dans [DEMARRER.md](DEMARRER.md).
 
 ## Comment les règles sont imposées (3 verrous)
 
@@ -61,8 +66,16 @@ Claude Code. Les verrous 1 et 3 fonctionnent avec toutes les IA.
 
 - **Pas un avocat.** L'IA vérifie les textes officiels et cite ses sources, mais fais relire tes
   pages légales par un professionnel avant un lancement commercial.
+- **Pas une garantie.** PromptComplet est fourni « en l'état », sans garantie (licence MIT). Il
+  réduit fortement les risques, mais tu restes responsable de ton projet.
 - **Pas figé.** Les lois et les prix changent. L'IA doit revérifier les sources officielles, au
   moins tous les 90 jours et avant chaque lancement.
+
+## Contribuer, signaler un problème
+
+- Une loi a changé, une information est fausse, une idée : [CONTRIBUTING.md](CONTRIBUTING.md).
+  Chaque changement légal doit citer une **source officielle**.
+- Une faille de sécurité dans la méthode : **en privé**, voir [SECURITY.md](SECURITY.md).
 
 ## Structure du dépôt
 

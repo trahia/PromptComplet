@@ -1,23 +1,21 @@
-PromptComplet — Licence d'utilisation privée
-Copyright (c) 2026 — le propriétaire du dépôt PromptComplet. Tous droits réservés.
+MIT License
 
-1. Accès
-   PromptComplet (la « Méthode ») est un dépôt privé. Seules les personnes à qui le propriétaire a
-   explicitement donné accès peuvent l'utiliser.
+Copyright (c) 2026 trahia (https://github.com/trahia) and PromptComplet contributors
 
-2. Ce qui est autorisé
-   Toute personne autorisée peut utiliser la Méthode pour concevoir, développer et exploiter ses
-   propres projets, y compris des projets commerciaux. Le code, les contenus et les documents
-   produits pour un projet appartiennent à la personne qui porte ce projet. Ils ne sont pas couverts
-   par la présente licence, sauf les fichiers de la Méthode eux-mêmes (dossier « promptcomplet/ »,
-   « CLAUDE.md », « AGENTS.md », « .claude/hooks/ », « .githooks/ », workflows de contrôle).
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-3. Ce qui est interdit sans accord écrit du propriétaire
-   - Publier, partager, redistribuer, revendre ou sous-licencier la Méthode, en tout ou en partie,
-     y compris sous une forme modifiée ou renommée.
-   - Donner accès à la Méthode à des tiers non autorisés.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-4. Absence de garantie
-   La Méthode est fournie « en l'état », sans garantie. Elle ne constitue pas un conseil juridique,
-   fiscal ou de sécurité. Chaque porteur de projet reste responsable de la conformité de son
-   produit et doit le faire vérifier par des professionnels avant tout lancement.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

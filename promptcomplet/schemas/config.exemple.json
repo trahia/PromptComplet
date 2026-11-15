@@ -1,6 +1,6 @@
 {
   "$schema": "../promptcomplet/schemas/config.schema.json",
-  "version_methode": "1.2.0",
+  "version_methode": "1.3.0",
   "statut": "construction",
   "porteur": { "prenom": "Alex", "langue": "fr" },
   "etablissement": { "pays": "FR", "statut_juridique": "micro-entreprise" },

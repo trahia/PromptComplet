@@ -32,7 +32,7 @@ projet. En cas de doute sur une commande, ne la lance pas : demande.
 ## Avant de commencer : discussion déjà en cours, mode, impartialité
 
 - **Pas d'accès, pas d'audit.** Si tu ne peux pas lire les fichiers de PromptComplet (sur claude.ai,
-  un lien vers un dépôt privé ne s'ouvre pas) ou ceux du projet, dis-le et explique comment les
+  un simple lien ne donne pas accès à tout un dépôt) ou ceux du projet, dis-le et explique comment les
   ajouter. Ne reconstitue **jamais** la méthode de mémoire, et ne fais pas un audit « à peu près ».
 - **Discussion déjà en cours.** Si cette discussion contient déjà un autre travail sur le projet, et
   surtout si tu as toi-même écrit ou modifié ce code ici, propose d'abord à la personne d'ouvrir une
