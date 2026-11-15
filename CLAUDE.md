@@ -69,6 +69,8 @@ Avant d'écrire du code sur un sujet, **lis le fichier de règles correspondant*
   lis pas, tu ne les écris pas.
 - Toute entrée est validée côté serveur (schémas stricts). En-têtes de sécurité HTTP, CSP, protection
   CSRF, limitation de débit, journaux sans données personnelles.
+- Un verrou bloque le code dangereux (injection SQL, XSS, commandes, TLS désactivé…). Chaque
+  formulaire et chaque API a ses **tests d'attaque**. Un scan ZAP **complet** est fait avant chaque lancement.
 - Dépendances : uniquement des paquets connus et maintenus, versions verrouillées (lockfile),
   vérifiées (pas de faute de frappe type « typosquatting »), scannées.
 - Fichiers envoyés par les utilisateurs : vrai type vérifié côté serveur, liste blanche, réencodage

@@ -71,6 +71,8 @@ export function calculerObligations(c) {
   if (c.newsletter === true) preuve('desinscription_emails', 'newsletter ou e-mails promotionnels');
   if (paiement && particuliers && dans(EEE)) preuve('retractation_en_ligne', 'vente à distance aux consommateurs dans l’EEE, depuis le 19/06/2026');
   if (c.publicite === true && tous.has('US')) preuve('opt_out_vente_partage', 'publicité + États-Unis — CCPA/CPRA');
+  const recoitDesDonnees = comptes || ugc || paiement || c.newsletter === true || fichiers || c.ia_dans_le_produit === true;
+  if (recoitDesDonnees) preuve('tests_attaques', 'formulaires ou API qui reçoivent des données — tests d’attaque, règle 01, section 4', /PAYLOADS_|TOUTES_LES_CHARGES|attack-payloads/, 'les charges d’attaque (kit/web/security/attack-payloads.ts)');
   if (fichiers) preuve('controle_fichiers', 'fichiers envoyés par les utilisateurs — règle 01, section 4', /validateUpload|detectFileType/, 'le contrôle des fichiers envoyés (validateUpload)');
   // Affichages obligatoires (legal/affichages-obligatoires.md)
   const venteConsoEEE = paiement && particuliers && dans(EEE);

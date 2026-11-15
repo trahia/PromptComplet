@@ -13,7 +13,7 @@ Pendant tout l'audit, **le projet ne change pas d'un octet**.
 | Créer, modifier, renommer ou supprimer un fichier du projet | Lire les fichiers |
 | Installer ou mettre à jour un paquet (`npm install`, `pip install`…) | `git status`, `git log`, `git ls-files`, `git show` (lecture) |
 | `git commit`, `checkout`, `reset`, `stash`, `clean`, `pull`, `push`, ou changer la config git | Rechercher dans le code (grep) |
-| Lancer un build, une migration, un script du projet, un formatage automatique | Avec l'accord de la personne, des outils en lecture seule : `npm audit` (sans `fix`), OSV-Scanner, Gitleaks. Leurs rapports vont **hors du projet** |
+| Lancer un build, une migration, un script du projet, un formatage automatique | Avec l'accord de la personne, des outils en lecture seule : `npm audit` (sans `fix`), OSV-Scanner, Gitleaks, `analyser-code.mjs` de ZeroTrap. Leurs rapports vont **hors du projet** |
 | Copier la méthode ZeroTrap **dans** le projet | Cloner la méthode dans un dossier temporaire **en dehors** du projet |
 | Corriger « au passage », même une faute de frappe | Noter le problème dans la liste |
 
@@ -87,7 +87,7 @@ Pour chaque domaine, lis le fichier de règles correspondant, puis cherche les �
 |---|---|
 | Secrets dans le code **et dans l'historique git** | `regles/01-securite.md`, section 3 |
 | Contrôle d'accès, RLS, colonnes modifiables par le client, IDOR | `regles/01-securite.md`, section 1 |
-| Validation des entrées, fichiers envoyés, SSRF, opérations simultanées | `regles/01-securite.md`, section 4 |
+| Injection SQL, XSS, commandes, validation des entrées, fichiers envoyés, SSRF, opérations simultanées | `regles/01-securite.md`, section 4, et `node <clone>/zerotrap/scripts/analyser-code.mjs <dossier du projet>` (lecture seule) |
 | En-têtes de sécurité, cookies de session, CORS, CSRF | `regles/01-securite.md`, section 5 |
 | Authentification, sessions, redirections, changement d'e-mail | `regles/03-authentification.md` |
 | Paiements, webhooks, règles des stores | `regles/04-paiements.md` |

@@ -116,6 +116,26 @@ Lors de la veille, vérifie qu'aucune version plus récente n'est parue.
   - transaction en base, avec contrainte d'unicité ou verrou de ligne ;
   - clé d'idempotence sur les requêtes du client qui créent ou paient ;
   - un test qui envoie 20 requêtes en même temps : une seule doit réussir.
+- **Verrou de code dangereux.** ZeroTrap bloque à l'écriture, au commit et à chaque vérification les
+  motifs les plus dangereux (`zerotrap/scripts/lib/code-dangereux.mjs`) :
+  - `eval` ;
+  - HTML injecté sans nettoyage (`innerHTML`, `dangerouslySetInnerHTML`, `v-html`…) ;
+  - SQL ou commande système construits avec des valeurs ;
+  - TLS désactivé ;
+  - redirection vers une adresse fournie par l'utilisateur.
+
+  Une exception n'est permise que pour du code qui ne reçoit **jamais** de donnée extérieure, après
+  explication à la personne, avec le commentaire `zerotrap-exception: <raison précise>`. Chaque
+  exception est relue par un humain avant le lancement.
+- **Tests d'attaque obligatoires.** Pour chaque formulaire et chaque route d'API qui reçoit des données,
+  un test envoie dans chaque champ les charges de `kit/web/security/attack-payloads.ts` (XSS,
+  injection SQL, commandes, chemins, redirections, valeurs limites). Il vérifie :
+  - que la valeur est refusée par la validation, ou affichée comme du texte ;
+  - qu'aucun script ne s'exécute ;
+  - qu'aucune erreur technique ni donnée d'un autre utilisateur n'apparaît dans la réponse ;
+  - qu'il n'y a aucune redirection vers un autre site.
+
+  Preuve : `config.preuves.tests_attaques`.
 
 ## 5. Web : en-têtes et cookies
 
@@ -227,10 +247,13 @@ Lors de la veille, vérifie qu'aucune version plus récente n'est parue.
 | Contrôle | Quand |
 |---|---|
 | Recherche de secrets (hook d'écriture, pre-commit, Gitleaks/TruffleHog en CI) | à chaque écriture, commit, push |
+| Code dangereux : injection SQL, XSS, commandes… (verrou ZeroTrap) | à chaque écriture, commit et vérification |
 | Analyse du code (Semgrep) | à chaque push |
+| Tests d'attaque (`attack-payloads.ts`) | à chaque exécution des tests |
 | Vulnérabilités des dépendances (npm audit, OSV-Scanner, Trivy figé par empreinte) | à chaque push, et chaque semaine |
 | `/security-review` ou plugin `security-guidance` | à chaque fonctionnalité sensible |
-| Scan dynamique OWASP ZAP baseline | sur la préproduction, avant chaque lancement |
+| Scan dynamique OWASP ZAP « baseline » (observe sans attaquer) | sur la préproduction, à chaque version |
+| Scan dynamique OWASP ZAP « complet » (vraies attaques, données de test) | sur la préproduction, **avant chaque lancement** |
 | Liste des composants (SBOM, format CycloneDX) | à chaque version publiée (section 13) |
 | **Test d'intrusion par un professionnel** | voir ci-dessous |
 

@@ -1,6 +1,6 @@
 {
   "$schema": "../zerotrap/schemas/config.schema.json",
-  "version_methode": "2.0.0",
+  "version_methode": "2.1.0",
   "statut": "construction",
   "porteur": { "prenom": "Alex", "langue": "fr" },
   "etablissement": { "pays": "FR", "statut_juridique": "micro-entreprise" },

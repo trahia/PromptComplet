@@ -9,6 +9,7 @@ import { calculerObligations } from './obligations.mjs';
 import { scannerTexte } from './secrets.mjs';
 import { estFichierSecret, lireTexte, listerFichiers, modeMainteneur } from './chemins.mjs';
 import { verifierIntegrite } from './integrite.mjs';
+import { analyserDossier } from './code-dangereux.mjs';
 
 const REPERE_A_COMPLETER = /\[\s*[ÀA]\s+COMPL[ÉE]TER/gi;
 const COMMENTAIRE_IA = /<!--\s*IA\b/g;
@@ -126,6 +127,17 @@ export function verifierConformite(racine, options = {}) {
       if (!/^\s*ignore-scripts\s*=\s*true/m.test(npmrc)) avert('securite', 'npm : ajoute « ignore-scripts=true » dans .npmrc, pour bloquer les scripts d’installation des paquets (attaques de 2025-2026).');
     }
   }
+
+  // 2 bis. Code dangereux : injection SQL, XSS, injection de commande… (règle 01, section 4).
+  // Avant le retour du mode pre-commit : le contrôle avant commit l'applique aussi.
+  let nbProblemes = 0;
+  for (const a of analyserDossier(racine)) {
+    for (const p of a.problemes) {
+      if (++nbProblemes <= 30) err('code', `${a.fichier}:${p.ligne} — ${p.titre}. ${p.conseil}`);
+    }
+    for (const x of a.exceptions) avert('code', `Exception de sécurité à faire relire par un humain — ${a.fichier}:${x.ligne} (${x.titre}) : « ${x.raison} ».`);
+  }
+  if (nbProblemes > 30) err('code', `… et ${nbProblemes - 30} autre(s) passage(s) de code dangereux. Liste complète : node zerotrap/scripts/analyser-code.mjs`);
 
   if (preCommit) return r;
 

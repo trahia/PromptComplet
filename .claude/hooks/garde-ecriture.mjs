@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // ZeroTrap — verrou d'écriture (hook PreToolUse : Write, Edit, MultiEdit, NotebookEdit).
-// Bloque : fichiers de la méthode, fichiers de secrets, secrets dans le contenu, pages légales vidées.
+// Bloque : fichiers de la méthode, fichiers de secrets, secrets dans le contenu, code dangereux
+// (injection SQL, XSS, injection de commande…), pages légales vidées.
 // En cas de panne du verrou, l'écriture est BLOQUÉE par sécurité.
 
 import fs from 'node:fs';
@@ -12,6 +13,7 @@ try {
   const { lireEntree, bloquer, autoriser } = await import(lib('hook-io.mjs'));
   const { racineProjet, raisonProtection, estFichierSecret, relatif } = await import(lib('chemins.mjs'));
   const { scannerTexte } = await import(lib('secrets.mjs'));
+  const { analyserCode, doitAnalyser, MARQUEUR_EXCEPTION } = await import(lib('code-dangereux.mjs'));
 
   const entree = await lireEntree();
   const ti = entree.tool_input || {};
@@ -48,6 +50,18 @@ Si la valeur vient d'une clé réelle collée dans la conversation, dis à la pe
   }
 
   const relNorm = String(affiche).replace(/\\/g, '/');
+  if (doitAnalyser(relNorm)) {
+    const problemes = textes.flatMap((t) => analyserCode(t, relNorm).problemes);
+    if (problemes.length) {
+      const liste = problemes.slice(0, 5).map((p) => `- ligne ${p.ligne} du texte écrit : ${p.titre}.\n  → ${p.conseil}`).join('\n');
+      const autres = problemes.length > 5 ? `\n… et ${problemes.length - 5} autre(s).` : '';
+      bloquer(`⛔ ZeroTrap — code dangereux dans ${affiche} :
+${liste}${autres}
+Règle 01, section 4 : une valeur venant de l'utilisateur ne doit jamais devenir du code, du HTML, du SQL ou une commande.
+Réécris ce passage de façon sûre. Exception seulement si ce code ne reçoit jamais de donnée extérieure, après l'avoir expliqué à la personne : ajoute sur la ligne, ou juste au-dessus, le commentaire « ${MARQUEUR_EXCEPTION} <raison précise> ». Chaque exception est signalée à chaque vérification, pour relecture humaine.`);
+    }
+  }
+
   if (/^legal\/[^/]+\/[^/]+\.md$/.test(relNorm) && entree.tool_name === 'Write' && fs.existsSync(abs) && String(ti.content || '').trim().length < 200) {
     bloquer(`⛔ ZeroTrap — page légale vidée : ${affiche}
 Une page légale obligatoire ne peut pas être vidée ou remplacée par un texte presque vide. Modifie-la section par section.`);

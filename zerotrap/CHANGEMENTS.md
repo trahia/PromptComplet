@@ -1,5 +1,30 @@
 # Historique des versions de ZeroTrap
 
+## 2.1.0 — 2026-11-15
+
+Protection renforcée contre l'injection SQL, le XSS et les autres injections, même sans GitHub.
+
+- **Verrou de code dangereux** (`scripts/lib/code-dangereux.mjs`, 20 règles). Il bloque :
+  - `eval` et `new Function` ;
+  - le HTML injecté sans nettoyage (`innerHTML`, `insertAdjacentHTML`, `document.write`,
+    `dangerouslySetInnerHTML`, `v-html`, `{@html}`) ;
+  - le SQL construit avec des valeurs (gabarit, concaténation, `$queryRawUnsafe`, `sql.raw`, Python) ;
+  - les filtres Supabase construits avec `${…}` ;
+  - les commandes système construites, ou lancées avec un shell ;
+  - le TLS désactivé et les redirections ouvertes.
+
+  Il agit à **chaque écriture** (hook Claude Code), à **chaque commit** et à **chaque vérification**,
+  donc même pour un projet qui n'est jamais envoyé sur GitHub. Exception possible seulement avec
+  `zerotrap-exception: <raison>`, signalée à chaque vérification pour relecture humaine.
+- **Audit** : `scripts/analyser-code.mjs`, en lecture seule, utilisable sur un projet existant
+  (méthode 09).
+- **Tests d'attaque obligatoires** : charges XSS, SQL, commandes, chemins, redirections et valeurs
+  limites dans `kit/web/security/attack-payloads.ts`, et nouvelle preuve `tests_attaques` pour tout
+  projet qui reçoit des données.
+- **Scan ZAP « complet »** (vraies attaques) ajouté au workflow ZAP, obligatoire sur la préproduction
+  avant chaque lancement ; le scan « baseline » reste disponible.
+- Règle 01 (sections 4 et 12), méthodes 04, 06 et 09, `CLAUDE.md` et kit mis à jour.
+
 ## 2.0.0 — 2026-11-15
 
 **PromptComplet devient ZeroTrap** (« zéro piège »).

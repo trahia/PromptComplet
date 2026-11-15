@@ -34,7 +34,13 @@ les scans de sécurité (voir `catalogue/outils-securite.md`).
 
 ## 3. Sécurité
 
-- [ ] Scans au vert : secrets, code, dépendances. Scan ZAP « baseline » sur la préproduction.
+- [ ] Scans au vert : secrets, code (Semgrep et verrou de code dangereux), dépendances.
+- [ ] Scan ZAP **complet** (vraies attaques) sur la préproduction, avec des données de test et les
+      e-mails en bac à sable : aucune alerte élevée, et les alertes moyennes corrigées ou justifiées.
+      Onglet Actions, Scan dynamique (ZAP), type « complet ». Jamais sur la production, ni sur un site
+      qui n'appartient pas à la personne.
+- [ ] Tests d'attaque au vert sur chaque formulaire et chaque API (`attack-payloads.ts`).
+- [ ] Chaque exception `zerotrap-exception:` relue et acceptée par un humain.
 - [ ] Clés de production saisies par la personne, distinctes des clés de test, avec droits minimaux.
 - [ ] Double authentification activée sur **tous** les comptes de la personne (GitHub, hébergeur,
       base de données, Stripe, Apple, Google, nom de domaine, e-mail).

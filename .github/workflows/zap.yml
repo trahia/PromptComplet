@@ -1,22 +1,40 @@
-# ZeroTrap — scan dynamique OWASP ZAP (baseline, non intrusif) d'une URL de PRÉPRODUCTION.
-# Lancement manuel uniquement (onglet Actions > Scan dynamique > Run workflow).
-# Ne jamais scanner un site qui n'appartient pas à la personne. Fichier PROTÉGÉ.
+# ZeroTrap — scan dynamique OWASP ZAP d'une URL de PRÉPRODUCTION. Fichier PROTÉGÉ.
+# Lancement manuel uniquement : onglet Actions > Scan dynamique (ZAP) > Run workflow.
+#
+# Deux types de scan :
+# - « baseline » : observe le site sans l'attaquer (en-têtes, cookies, fuites d'informations). Sans risque.
+# - « complet »  : ATTAQUE réellement le site (injection SQL, XSS, injection de commande, traversée de
+#   chemins…). Obligatoire avant chaque lancement (methode/06, section 3). Il remplit les formulaires et
+#   crée des données de test : uniquement sur une PRÉPRODUCTION avec des données de test, e-mails en
+#   bac à sable, jamais sur la production.
+#
+# Ne jamais scanner un site qui n'appartient pas à la personne : attaquer le site de quelqu'un d'autre
+# est un délit (en France, articles 323-1 et suivants du Code pénal).
 name: Scan dynamique (ZAP)
 
 on:
   workflow_dispatch:
     inputs:
       url:
-        description: "URL de préproduction à analyser (un site qui t'appartient)"
+        description: "URL de PRÉPRODUCTION à analyser (un site qui t'appartient, jamais la production)"
         required: true
         type: string
+      type:
+        description: "baseline = observe sans attaquer ; complet = vraies attaques (avant chaque lancement)"
+        required: true
+        default: baseline
+        type: choice
+        options:
+          - baseline
+          - complet
 
 permissions:
   contents: read
 
 jobs:
-  zap:
-    name: ZAP baseline
+  baseline:
+    name: ZAP baseline (sans attaque)
+    if: inputs.type == 'baseline'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -29,4 +47,23 @@ jobs:
           target: ${{ inputs.url }}
           allow_issue_writing: false
           fail_action: true
-          artifact_name: rapport-zap
+          artifact_name: rapport-zap-baseline
+
+  complet:
+    name: ZAP complet (vraies attaques)
+    if: inputs.type == 'complet'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: OWASP ZAP full scan (injection SQL, XSS, commandes, chemins…)
+        uses: zaproxy/action-full-scan@3c58388149901b9a03b7718852c5ba889646c27c # v0.13.0
+        with:
+          target: ${{ inputs.url }}
+          # -j : exploration AJAX, pour les applications qui construisent leurs pages en JavaScript.
+          cmd_options: '-j'
+          allow_issue_writing: false
+          fail_action: true
+          artifact_name: rapport-zap-complet

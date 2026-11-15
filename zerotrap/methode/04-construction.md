@@ -52,7 +52,9 @@ Avance par **petites étapes** visibles. Pour chaque fonctionnalité :
    - tests unitaires de la logique ;
    - test de bout en bout du parcours ;
    - test d'accessibilité ;
-   - **test des droits** : un utilisateur A ne peut jamais lire ni modifier les données d'un utilisateur B.
+   - **test des droits** : un utilisateur A ne peut jamais lire ni modifier les données d'un utilisateur B ;
+   - **tests d'attaque** : chaque champ de chaque formulaire et de chaque API reçoit les charges de
+     `kit/web/security/attack-payloads.ts` (règle 01, section 4).
 8. **Légal** : mets à jour les pages légales, le registre et `config.json` si l'analyse d'impact
    l'exige.
 9. **Vérification** : lance le linter, le typage, les tests et
